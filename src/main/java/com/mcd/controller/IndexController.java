@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
-import java.math.BigInteger;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 /**
  * Created by MaoChenDong on 2020/3/22.
@@ -45,14 +47,15 @@ public class IndexController {
       BufferedWriter bw = null;
       try{
 
-          fr = new FileReader("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt");
+          fr = new FileReader("/home/mcd/nums.txt");
           br=new BufferedReader(fr);
 
           String count = (String)br.readLine();
           System.out.println("my is ##################"+count);
           String i  = Integer.toString(Integer.parseInt(count)+1);
           model.addAttribute("message",i);
-          fw = new FileWriter("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt",false);
+//          fw = new FileWriter("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt",false);
+          fw = new FileWriter("/home/mcd/nums.txt",false);
           bw = new BufferedWriter(fw);
           bw.write(i);
           bw.flush();

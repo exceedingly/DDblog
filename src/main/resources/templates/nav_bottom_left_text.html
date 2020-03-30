@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            /*overflow:-Scroll;*/
+            overflow-y:hidden;
+            /*overflow:-Scroll;overflow-x:hidden*/
+        }
+
+        #nav_bottom{
+               background-image:url("");
+               background-repeat:no-repeat;
+               background-size:100% 100%;
+               -moz-background-size:100% 100%;
+               border-top: solid 1px blue;
+               width: 100%;
+
+               text-align: center;
+               height: 100%;
+           }
+        #nav_bottom_left{
+
+
+            /*border: solid red;*/
+            text-align: center;
+            width: 85%;
+            height: 100%;
+            float: left;
+
+        }
+        #nav_bottom_right{
+            margin-right: 1%;
+            float: right;
+            border-left: 1px solid blue;
+            width: 14%;
+            height: 100%;
+            float: right;
+            /*text-align: center;*/
+
+        }
+        #nav_bottom_vx{
+                width: 35%;
+            height: 35%;
+            background-image:url("images/vx_logo.jpg");
+            background-repeat:no-repeat;
+            background-size:100% 100%;
+            -moz-background-size:100% 100%;
+        }
+        #nav_bottom_font{
+            float: left;
+            background-color: #faf2cc;
+            height: 10%;
+            width: 100%;
+        }
+        #nav_bottom_font_span{
+            color: black;
+            float: left;
+        }
+
+
+
+    </style>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+</head>
+<body >
+<div  id="nav_bottom">
+
+    <div id="nav_bottom_left">
+        <div class="well" style="height: 100%">
+            <p id='wycontent'></p>
+            <p id='wyname' style="float:right"></p>
+            <p id='wyusername' style="float:right"></p>
+        </div>
+
+    </div>
+    <div id="nav_bottom_right" >
+
+
+        <div id="nav_bottom_vx"></div>
+        <div style="float: right"></div>
+
+       <!--<a  href="/test"  >再来一个</a>-->
+        <a class="btn btn-primary btn-lg" href="/test" role="button" style="float: left;width: 100%">更新一下</a>
+
+    </div>
+
+    <!--<div class="jumbotron">-->
+       <!--<h6><p id="hitokoto"></p></h6>-->
+        <!--<p><a style="padding-left: 50% " class="btn btn-primary btn-lg" href="/test" role="button">Learn more</a></p>-->
+    <!--</div>-->
+
+
+    <!--<div id="nav_bottom" >-->
+        <!--<div id="nav_bottom_left" >-->
+            <!--<div  style="" >-->
+                <!--<p id="hitokoto"></p>-->
+            <!--</div>-->
+
+
+        <!--</div>-->
+        <!--<p>123</p>-->
+        <!--&lt;!&ndash;<div id="nav_bottom_right" >&ndash;&gt;-->
+        <!--&lt;!&ndash;<a  href="/test" >换一句吧</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--</div>-->
+
+
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+<script>
+
+        fetch('https://v1.hitokoto.cn')
+            .then(response => response.json())
+    .then(data => {
+            const hitokoto = document.getElementById('hitokoto')
+            hitokoto.innerText = data.hitokoto
+    })
+    .catch(console.error)
+
+</script>
+<script>
+    123=function () {
+        var v = window.location.href;
+
+    }
+</script>
+<script>
+    $(document).ready(function(){
+        $("button1").click(function(){
+            $.get("http://api.tianapi.com/txapi/hotreview/index?key=APIKEY",
+                function(data,status){
+                    console.log(data);
+                    $('#result').append(JSON.stringify(data)); //返回内容绑定到ID为result的标签
+                    alert("状态码：" + data.code + "\n消息：" + data.msg);
+                });
+        });
+    });
+
+</script>
+
+<script type="text/javascript" src="https://api.4gml.com/NeteaseMusic?type=js"></script>
+<script type="text/javascript" src="https://api.4gml.com/NeteaseMusic?type=bq" async defer></script>
