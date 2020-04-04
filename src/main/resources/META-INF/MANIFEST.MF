@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Main-Class: com.mcd.CommunityApplication
+Class-Path: libs/spring-beans-5.1.6.RELEASE.jar libs/spring-boot-2.1.4.R
+ ELEASE.jar libs/spring-boot-starter-json-2.1.4.RELEASE.jar libs/mybatis
+ -spring-boot-starter-2.0.1.jar libs/jackson-datatype-jdk8-2.9.8.jar lib
+ s/spring-boot-starter-logging-2.1.4.RELEASE.jar libs/mybatis-spring-2.0
+ .1.jar libs/jackson-datatype-jsr310-2.9.8.jar libs/log4j-api-2.11.2.jar
+  libs/jul-to-slf4j-1.7.26.jar libs/tomcat-embed-el-9.0.17.jar libs/tomc
+ at-embed-websocket-9.0.17.jar libs/mybatis-3.5.1.jar libs/spring-expres
+ sion-5.1.6.RELEASE.jar libs/spring-boot-starter-thymeleaf-2.1.4.RELEASE
+ .jar libs/classmate-1.4.0.jar libs/tomcat-embed-core-9.0.17.jar libs/my
+ batis-spring-boot-autoconfigure-2.0.1.jar libs/spring-core-5.1.6.RELEAS
+ E.jar libs/mysql-connector-java-5.1.45.jar libs/thymeleaf-spring5-3.0.1
+ 1.RELEASE.jar libs/thymeleaf-extras-java8time-3.0.4.RELEASE.jar libs/ja
+ ckson-core-2.9.8.jar libs/jackson-databind-2.9.8.jar libs/log4j-to-slf4
+ j-2.11.2.jar libs/spring-boot-autoconfigure-2.1.4.RELEASE.jar libs/java
+ x.annotation-api-1.3.2.jar libs/spring-boot-starter-tomcat-2.1.4.RELEAS
+ E.jar libs/spring-boot-devtools-2.1.4.RELEASE.jar libs/jackson-module-p
+ arameter-names-2.9.8.jar libs/hibernate-validator-6.0.16.Final.jar libs
+ /spring-jdbc-5.1.6.RELEASE.jar libs/logback-core-1.2.3.jar libs/logback
+ -classic-1.2.3.jar libs/snakeyaml-1.23.jar libs/jackson-annotations-2.9
+ .0.jar libs/spring-tx-5.1.6.RELEASE.jar libs/validation-api-2.0.1.Final
+ .jar libs/spring-jcl-5.1.6.RELEASE.jar libs/spring-webmvc-5.1.6.RELEASE
+ .jar libs/thymeleaf-3.0.11.RELEASE.jar libs/spring-boot-starter-jdbc-2.
+ 1.4.RELEASE.jar libs/spring-web-5.1.6.RELEASE.jar libs/spring-aop-5.1.6
+ .RELEASE.jar libs/spring-boot-starter-2.1.4.RELEASE.jar libs/slf4j-api-
+ 1.7.26.jar libs/HikariCP-3.2.0.jar libs/attoparser-2.0.5.RELEASE.jar li
+ bs/spring-boot-starter-web-2.1.4.RELEASE.jar libs/unbescape-1.1.6.RELEA
+ SE.jar libs/spring-context-5.1.6.RELEASE.jar libs/jboss-logging-3.3.2.F
+ inal.jar
+

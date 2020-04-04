@@ -3,6 +3,7 @@ package com.mcd.controller;
 import com.mcd.mapper.UserMapper;
 import com.mcd.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import java.io.FileWriter;
 /**
  * Created by MaoChenDong on 2020/3/22.
  */
+@EnableAutoConfiguration
 @Controller
 public class IndexController {
     @Autowired
@@ -47,21 +49,22 @@ public class IndexController {
       BufferedWriter bw = null;
       try{
 
-          fr = new FileReader("/home/mcd/nums.txt");
+//          fr = new FileReader("/home/mcd/nums.txt");
+          fr = new FileReader("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt");
           br=new BufferedReader(fr);
 
           String count = (String)br.readLine();
           System.out.println("my is ##################"+count);
           String i  = Integer.toString(Integer.parseInt(count)+1);
           model.addAttribute("message",i);
-//          fw = new FileWriter("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt",false);
-          fw = new FileWriter("/home/mcd/nums.txt",false);
+          fw = new FileWriter("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt",false);
+//          fw = new FileWriter("/home/mcd/nums.txt",false);
           bw = new BufferedWriter(fw);
           bw.write(i);
           bw.flush();
       }catch (Exception e){
           System.out.println("读文件异常");
-          e.printStackTrace();
+         // e.printStackTrace();
       }
       return "index";
   }
