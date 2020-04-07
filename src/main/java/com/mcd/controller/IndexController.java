@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -49,16 +50,16 @@ public class IndexController {
       BufferedWriter bw = null;
       try{
 
-//          fr = new FileReader("/home/mcd/nums.txt");
-          fr = new FileReader("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt");
+          fr = new FileReader("/home/mcd/nums.txt");
+//          fr = new FileReader("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt");
           br=new BufferedReader(fr);
 
           String count = (String)br.readLine();
           System.out.println("my is ##################"+count);
           String i  = Integer.toString(Integer.parseInt(count)+1);
           model.addAttribute("message",i);
-          fw = new FileWriter("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt",false);
-//          fw = new FileWriter("/home/mcd/nums.txt",false);
+//          fw = new FileWriter("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt",false);
+          fw = new FileWriter("/home/mcd/nums.txt",false);
           bw = new BufferedWriter(fw);
           bw.write(i);
           bw.flush();
@@ -114,8 +115,10 @@ public class IndexController {
 //        return "error";
 //    }
     @GetMapping("/login")
-    public String Login(Model model){
+    public String Login(Model model
+                       ){
         model.addAttribute("message","my is mass age");
+
         return "login";
     }
     @GetMapping("/nav_bottom_left_text")

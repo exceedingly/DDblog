@@ -223,11 +223,10 @@ body {
     width: 100px;
 }
  #section4{
-     margin-top: 70px;
+     margin-top: 170px;
 
-     height:500px;
-     width: 100%;
-     border: solid black;
+    border: solid whitesmoke;
+
  }
  /*底部导航栏大小*/
  /*#nav_bottom{*/
