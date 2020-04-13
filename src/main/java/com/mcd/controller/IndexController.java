@@ -100,12 +100,30 @@ public class IndexController {
     }
 
 
+    @GetMapping(value="/zh")
+    public String zh(Model model) {
+
+
+        return "zh";
+    }
+
+
     @GetMapping("/mcd")
     public String getMassage(Model model){
+      try{
 
-        model.addAttribute("message","my is mass age");
+              User user = (User)userMapper.findByToken("1323086220");
 
-        return "index";
+              System.out.println(user);
+              model.addAttribute("message",user);
+
+      }catch (Exception e){
+          System.out.println("读取远程数据库失败");
+      }
+
+
+
+        return "mcd";
     }
 
 //    @GetMapping("/error")
