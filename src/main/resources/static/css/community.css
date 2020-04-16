@@ -47,7 +47,7 @@ body {
 /*登陆按钮*/
 #login{
     margin-left: 90%;
-    margin-top: px;
+    margin-top: 10px;
     float: right;
 }
 
@@ -264,12 +264,14 @@ body {
 
  /*}*/
 
-
- #JYQ{
-     text-align: center;
+ #MENU{
+     text-align: left ;
      height: 60px;
      width: auto;
-     margin-top: 10px;
+     margin-top: 40px;
      margin-left: 35px;
 
  }
+#FKL{
+    text-align: right;
+}

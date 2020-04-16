@@ -1,57 +1,33 @@
-$(function() {
-    $(".nav2").hide();
-    $(window).scroll(function() {
-        if($(document).scrollTop() >= 20) {
-            $(".nav2").addClass("fixnav").slideDown();
-        } else {
-            $(".nav2").hide();
+//
+// function show_runtime() {
+//     window.setTimeout("show_runtime()", 1000);
+//     X = new Date("12/4/2018 00:00:00");
+//     Y = new Date();
+//     T = (Y.getTime() - X.getTime());
+//     M = 24 * 60 * 60 * 1000;
+//     a = T / M;
+//     A = Math.floor(a);
+//     b = (a - A) * 24;
+//     B = Math.floor(b);
+//     c = (b - B) * 60;
+//     C = Math.floor((b - B) * 60);
+//     D = Math.floor((c - C) * 60);
+//     runtime_span.innerHTML = "网站已艰难运行" + A + "天" + B + "小时" + C + "分" + D + "秒"
+//     show_runtime();
+//
+// }
+// show_runtime();
+App.directive('repeatFinish', function () {
+    return {
+        link: function (scope, element, attr) {
+            if (scope.$last == true) {
+                //列表渲染完毕后重新渲染 layui element 元素
+                layui.use(['element'], function () {
+                    var element = layui.element;
+                    //初始化动态元素，一些动态生成的元素如果不设置初始化，将不会有默认的动态效果
+                    element.init();
+                });
+            }
         }
-    })
-})
-
-var tew=document.getElementById('cont')
-function getTime(){     	//获取时间
-    var date=new Date();
-
-    var year=date.getFullYear();
-    var month=date.getMonth()+2;
-    var day=date.getDate();
-
-    var hour=date.getHours();
-    var minute=date.getMinutes();
-    var second=date.getSeconds();
-
-    //这样写显示时间在1~9会挤占空间；所以要在1~9的数字前补零;
-    if (hour<10) {
-        hour='0'+hour;
     }
-    if (minute<10) {
-        minute='0'+minute;
-    }
-    if (second<10) {
-        second='0'+second;
-    }
-
-
-    var x=date.getDay();//获取星期
-
-
-
-    var time=year+'/'+month+'/'+day+'/'+hour+':'+minute+':'+second
-    tew.innerHTML=time;//将时间显示在div内
-}
-
-
-// $(function () {
-//     setInterval(function () {
-//         $("#autore").load(location.href + " #autore");//注意后面DIV的ID前面的空格，很重要！没有空格的话，会出双眼皮！（也可以使用类名）
-//     }, 8000);//8秒自动刷新
-// })
-// $.ajax({
-//     url: "index.html",
-//     context: document.body,
-//     success: function(){
-//         $('#nav_bottom_left_button').html('请求得到的数据内容');
-//
-//     }});
-//
+});

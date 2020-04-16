@@ -130,11 +130,46 @@
 <!--			<scope>provided</scope>-->
 		</dependency>
 
+<!--		<dependency>-->
+<!--&lt;!&ndash;			解决flyway 报错&ndash;&gt;-->
+<!--			<groupId>org.fusesource.leveldbjni</groupId>-->
+<!--			<artifactId>leveldbjni-all</artifactId>-->
+<!--			<version>1.8</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			&lt;!&ndash;			解决flyway 报错&ndash;&gt;-->
+
+<!--			<groupId>org.fusesource.leveldbjni</groupId>-->
+<!--			<artifactId>leveldbjni</artifactId>-->
+<!--			<version>1.8</version>-->
+<!--		</dependency>-->
+
 	</dependencies>
 
 	<build>
 
 		<plugins>
+
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>5.2.4</version>
+				<configuration>
+					<url>jdbc:mysql://localhost:3306/ddblog</url>
+					<user>root</user>
+					<password>123456</password>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.45</version>
+					</dependency>
+
+				</dependencies>
+			</plugin>
+
 <!--			<plugin>-->
 <!--				<groupId>org.flywaydb</groupId>-->
 <!--				<artifactId>flyway-maven-plugin</artifactId>-->
@@ -205,6 +240,7 @@
 
 		</plugins>
 	</build>
+
 
 </project>
 
