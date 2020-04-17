@@ -1,6 +1,6 @@
 package com.mcd.service;
 
-import com.mcd.pojo.User;
+import com.mcd.model.User;
 import org.springframework.stereotype.Service;
 
 /**

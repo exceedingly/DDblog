@@ -148,7 +148,7 @@ body.openmenu {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 101;
+  z-index: 9999;
   overflow: hidden;
   -webkit-box-shadow: 3px 0 7px rgba(0,0,0,0.55);
   -moz-box-shadow: 3px 0 7px rgba(0,0,0,0.55);

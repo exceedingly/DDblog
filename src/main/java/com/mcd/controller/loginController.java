@@ -1,6 +1,6 @@
 package com.mcd.controller;
 
-import com.mcd.pojo.User;
+import com.mcd.model.User;
 import com.mcd.service.UserService;
 import com.mcd.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

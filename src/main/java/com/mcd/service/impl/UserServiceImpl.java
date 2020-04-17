@@ -1,7 +1,7 @@
 package com.mcd.service.impl;
 
 import com.mcd.mapper.UserMapper;
-import com.mcd.pojo.User;
+import com.mcd.model.User;
 import com.mcd.service.UserService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>开始使用layui</title>
     <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/community.css">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-</head>
-<body>
-<!doctype html>
-<html lang="en-US">
-<head>
-    <meta charset="gb2312">
+
+
     <meta http-equiv="Content-Type" content="text/html">
-    <title>jquery网站左侧弹出导航菜单 - 站长素材</title>
+
     <meta name="author" content="Jake Rocheleau">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style1.css">
@@ -23,12 +24,12 @@
 
 </head>
 
-<body>
+<body style="background-color: whitesmoke;">
 <div>
 
 
-<ul class="layui-nav" style="position: fixed;top: 0;">
-    <li class="layui-nav-item" style="margin-left: 100px"><a href="">最新活动</a></li>
+<ul class="layui-nav" style="position: fixed;top: 0;z-index: 9997">
+    <li class="layui-nav-item" style="margin-left: 100px">最新活动</li>
     <li class="layui-nav-item"><a href="">最新活动</a></li>
     <li class="layui-nav-item"><a href="">最新活动</a></li>
 
@@ -44,34 +45,35 @@
     </li>
     <li class="layui-nav-item"><a href="">社区</a></li>
     <li class="layui-nav-item" lay-unselect="" >
-        <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
-        <dl class="layui-nav-child">
-            <dd><a href="javascript:;">修改信息</a></dd>
-            <dd><a href="javascript:;">安全管理</a></dd>
-            <dd><a href="javascript:;">退了</a></dd>
-        </dl>
+
+
+
+        <ul>
+
+            <li th:if="${ null != session.user}">
+                <a th:text="${session.user.getUsername() }">aa</a></a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/publish">添加博文</a></dd>
+                    <dd><a href="javascript:;">修改信息</a></dd>
+                    <dd><a href="javascript:;">安全管理</a></dd>
+                    <dd><a href="javascript:;">退了</a></dd>
+                </dl>
+            </li>
+            <li th:if="${session.user == null}">
+                <a href="/login">登陆</a>
+            </li>
+
+        </ul>
+
+
+
+
+
+
+
     </li>
-    <li class="layui-nav-item">
-        <div style="margin-left: 20px;padding-top: 13px">
 
-            <ul>
-
-                <li th:if="${ null != session.user}">
-
-                    <a th:text="${session.user.getUsername() }">aa</a>
-
-                    </a>
-
-                </li>
-
-                <li th:if="${session.user == null}">
-                    <a href="/login">登陆</a>
-                </li>
-
-            </ul>
-        </div>
-    </li>
-    <li class="layui-nav-item">
+    <li class="layui-nav-item" style="text-align: right;float: right">
         <div id="J1YQ" style="font-size: 15px;width: 300px;margin-left: 150px;font-size: 13px">访问量：<span
                 th:text="${message}">default message</span>
 
@@ -101,14 +103,14 @@
 <div id="pgcontainer">
 
         <div id="navbar">
-            <li class="layui-nav-item">  <a href="#" class="menubtn " style="position: fixed;top: 0;">MENU</a></li>
+            <li class="layui-nav-item">  <a href="#" class="menubtn " style="position: fixed;top: 0;position: fixed;top: 0;z-index: 9998">MENU</a></li>
             <!-- use captain icon for toggle menu -->
             <div id="hamburgermenu">
-                <ul>
+                <ul style="z-index: 9999">
                     <li><a href="#">首页</a></li>
                     <li><a href="#">学习日志</a></li>
-                    <li><a href="#">Log</a></li>
-                    <li><a href="#">学习经历</a></li>
+                    <li><a href="#">时光轴</a></li>
+                    <li><a href="#">教育背景</a></li>
                     <li><a href="#">致谢</a></li>
                 </ul>
             </div>
@@ -119,6 +121,7 @@
 
 </div>
 </div>
+
 </body>
 </html>
 
@@ -131,7 +134,7 @@
         var layer = layui.layer
             , form = layui.form;
 
-        layer.msg('Hello World');
+        // layer.msg('Hello World');
     });
 </script>
 </body>

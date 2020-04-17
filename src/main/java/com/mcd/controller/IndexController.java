@@ -1,7 +1,7 @@
 package com.mcd.controller;
 
 import com.mcd.mapper.UserMapper;
-import com.mcd.pojo.User;
+import com.mcd.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -144,5 +143,6 @@ public class IndexController {
         model.addAttribute("message","my is mass age");
         return "nav_bottom_left_text";
     }
+
 
 }

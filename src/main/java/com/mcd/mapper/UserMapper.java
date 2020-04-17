@@ -1,6 +1,6 @@
 package com.mcd.mapper;
 
-import com.mcd.pojo.User;
+import com.mcd.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
