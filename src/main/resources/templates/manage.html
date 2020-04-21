@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>开始使用layui</title>
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/community.css">
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <meta http-equiv="Content-Type" content="text/html">
+
+    <meta name="author" content="Jake Rocheleau">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style1.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+
+
+</head>
+<body class="layui-layout-body" style="background-color: whitesmoke">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">layui 后台布局</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+
+        <ul class="layui-nav layui-layout-right" style="float: right;text-align: right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    贤心
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">所有商品</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/selAllUser" tab_id="1">文章列表</a></dd>
+                        <dd><a href="/publish" tab_id="2">发送信息</a></dd>
+                        <dd><a href="javascript:;" tab_id="3">权限分配</a></dd>
+                        <dd><a href="javascript:;" tab_id="4" data-url="../index.html">超链接</a></dd>
+                    </dl>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+
+            <!--            <div class="layui-tab layui-tab-card" lay-filter="mytab" lay-allowClose="true">-->
+            <!--                <ul class="layui-tab-title">-->
+
+            <!--                </ul>-->
+            <!--                <div class="layui-tab-content" style="height: 100px;">-->
+            <!--                  -->
+            <!--                </div>-->
+            <!--            </div>-->
+            <div class="layui-tab layui-tab-card" lay-allowClose="true" lay-filter="mytab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" >首页</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <iframe id="iframeMain" src=""></iframe>
+                </div>
+            </div>
+
+            <!--           -->
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
+        </div>
+    </div>
+    <script src="js/layui.all.js"></script>
+    <script>
+        //JavaScript代码区域
+        var $ = layui.jquery,
+            element = layui.element;
+        $(document).on('click', 'a', function () {
+            if (!$(this)[0].hasAttribute("tab_id") || $(this).attr("tab_id") === '') {
+                return;
+            }
+            var layid = $(this).attr("tab_id");
+
+            var text = $(this).text();
+            var dataurl = $(this).attr("data-url");
+
+            // alert("layid:"+layid+"  text:"+text+"  dataurl:   "+dataurl);
+            var tabs = $(".layui-tab-title").children();
+            // alert("tabs:     "+tabs);
+            var msg = true;
+            // alert("tabs长度:"+tabs.length)
+            $.each(tabs, function (i, item) {
+
+                //遍历打开的tab有几个
+                var tabid = $(item).attr("lay-id");
+
+                // alert('因为tab大于一 所以我遍历:目前加上我已经打开' + tabid+1+"tab");
+                if (tabid === layid) {
+                    //判断该标签是否已经打开 相等返回false
+                    alert('判断该标签是否已经打开 已经打开返回false');
+                    msg = false;
+
+                    return false;
+                }
+                //监听删除tab
+                element.on('tabDelete(mytab)', function(data){
+
+                    alert("删除 tabs  "+tabs[i].text);
+                });
+
+            });
+            // alert('msg :' + msg);
+            if (msg) {
+                //向右侧 添加一个新的tabs
+
+                element.tabAdd('mytab', {
+                    title: text,
+                    content: "<iframe frameborder='0' width='100%' height='100%' src='" + dataurl + "'></iframe>",
+                    id: layid
+                });
+            }
+            resize();
+            element.tabChange('mytab', layid);
+
+            //监听切换
+            element.on('tab(mytab)', function(data){
+                alert("切换");
+
+            });
+            //监听点击事件
+            element.on('nav(mytab)', function(elem){
+                alert("点击");
+            });
+            //监听删除
+            element.on('tabDelete(mytab)', function(data){
+                alert("删除")
+            });
+        });
+
+        function resize() {
+            var $content = $(".layui-tab-content");
+            $content.height($(this).height() - 200);
+            $content.find('iframe').each(function () {
+                $(this).height($content.height());
+                $(this).width("100%")
+
+            })
+
+        }
+
+        $(window).on('resize', function () {
+            var $content = $(".layui-tab-content");
+            $content.height($(this).height() - 200);
+            $content.find('iframe').each(function () {
+                $(this).height($content.height());
+                $(this).width("100%")
+
+            });
+
+        });
+        $(window).on('load', function () {
+            var $content = $(".layui-tab-content");
+            $content.height($(this).height() - 200);
+            $content.find('iframe').each(function () {
+                $(this).height($content.height());
+                $(this).width("100%")
+
+            });
+
+        });
+
+
+
+
+        function close(status) {
+            if (status == "yes") {
+                window.parent.location.reload();//刷新父页面
+                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                parent.layer.close(index);
+            }
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+
+
+
+    </script>
+    <script>
+        //JavaScript代码区域
+        layui.use('element', function () {
+            var element = layui.element;
+            element.on('tab(demo)', function (data) {
+                console.log(data);
+            });
+
+        });
+        // layui.use('element', function () {
+        //     var $ = layui.jquery;
+        //     element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        //     element.on('tab(test1)', function () {
+        //         location.hash = 'test1=' + this.getAttribute('lay-id');
+        //     });
+        // });
+
+        //模拟单页跳转
+        $(document).ready(function () {
+            $("dd>a").click(function (e) {
+                e.preventDefault();
+                $("#iframeMain").attr("src", $(this).attr("href"));
+            });
+        });
+
+
+
+
+    </script>
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-@Controller("")
+@Controller()
 public class PublicController {
     @Autowired
     QuestionMapper questionMapper;
@@ -54,7 +54,20 @@ public class PublicController {
             }
         }
         if(user == null){
-            model.addAttribute("error","user is null");
+            model.addAttribute("usernull","请登录");
+            return "publish";
+        }
+        if(title == null || title.equals("")){
+            model.addAttribute("titlenull","标题不能为空");
+            return "publish";
+        }
+        if(title == null || title.equals("")){
+            model.addAttribute("descriptionnull","内容不能为空");
+            return "publish";
+        }
+        if(title == null || title.equals("")){
+            model.addAttribute("tagnull","标签不能为空");
+            return "publish";
         }
 
 
@@ -62,6 +75,7 @@ public class PublicController {
         question.setTitle(title);
         question.setDescription(description);
         question.setTag(tag);
+
         question.setCreator(user.getToken());
         question.setGmt_create(System.currentTimeMillis());
         question.setGmt_modified(question.getGmt_create());

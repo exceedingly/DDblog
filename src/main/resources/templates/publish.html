@@ -24,8 +24,7 @@
 <div class="container">
 
 
-    <div class="container-fluid main" style="background-image: url(" ..
-    /images/spring.jpg")">
+    <div class="container-fluid main" >
     <div class="row" style="margin-top: 70px">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2 style="font-size: 30px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起</h2>
@@ -43,7 +42,7 @@
                     <label for="description">问题补充 (必填，请参照右侧提示):</label>
                     <textarea name="description" id="description"
                               class="form-control"
-                              cols="30"
+                              cols=""
                               rows="10">
 
                     </textarea>
@@ -56,12 +55,16 @@
                            placeholder="输入标签，以，号分隔"
                            onclick="showSelectTag()">
 
-                    <div th:if="${ null == session.user}">
-                        <div class="alert alert-danger" th:text="${error}"></div>
+
+                    <div style="font-size: 15px;text-align: center;margin-top: 15px">
+                        <span class="alert-danger" style="font-size: 15px" th:text="${usernull}">default message</span>
+                        <span class="alert-danger" style="font-size: 20px" th:text="${titlenull}">default message</span>
+                        <span class="alert-danger" th:text="${descriptionnull}">default message</span>
+                        <span class="alert-danger" th:text="${tagnull}">default message</span>
+                        <button type="submit" class="btn btn-success btn-publish ">发布</button>
                     </div>
 
 
-                    <button type="submit" class="btn btn-success btn-publish ">发布</button>
                 </div>
 
             </form>

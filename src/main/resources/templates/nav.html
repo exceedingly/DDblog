@@ -43,7 +43,7 @@
             <dd><a href="">电商平台</a></dd>
         </dl>
     </li>
-    <li class="layui-nav-item"><a href="">社区</a></li>
+    <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/manage">后台</a></li>
     <li class="layui-nav-item" lay-unselect="" >
 
 

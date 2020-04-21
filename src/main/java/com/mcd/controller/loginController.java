@@ -25,6 +25,12 @@ public class loginController {
     public String loginController(HttpServletRequest request,
                                   Model model,
                                   HttpServletResponse response){
+
+        StringBuffer requestURL = request.getRequestURL();
+        System.out.println(requestURL);
+
+
+
         String u = request.getParameter("u");
         String p = request.getParameter("p");
         String token =  UUID.randomUUID().toString();
@@ -43,6 +49,7 @@ public class loginController {
 
             }else{
                 System.out.println("数据库没有");
+                return "redirect:/";
             }
         }catch (Exception e){
             e.printStackTrace();
