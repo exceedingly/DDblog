@@ -31,7 +31,7 @@
         table.render({
             elem: '#layListId',
             id: 'layTableId',
-            url: 'json/table.json',
+            url: 'json/selAllUser.json',
             title: '维修保养报',
             cellMinWidth: 100,
             cols: [
@@ -42,24 +42,19 @@
                     type: 'numbers',
                     fixed: 'left'
                 }, {
-                    field: 'deviceNumber',
-                    title: '设备编号',
+                    field: 'username',
+                    title: 'username',
                     minWidth: '120'
                 }, {
-                    field: 'deviceName',
-                    title: '设备名称',
+                    field: 'password',
+                    title: 'password',
                     minWidth: '120'
                 }, {
-                    field: 'deviceType',
-                    title: '设备型号'
-                }, {
-                    title: '操作',
-                    minWidth: '180',
-                    align: 'center',
-                    toolbar: '#barDemo'
+                    field: 'token',
+                    title: 'token'
                 }]
             ],
-            page: true
+            page: false
         });
         //监听工具条
         table.on('tool(layList)', function(obj) {

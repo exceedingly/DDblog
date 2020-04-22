@@ -14,22 +14,19 @@
     <script src="js/bootstrap.min.js"></script>
 
     <style>
-        body{
-            background-color: #f0efee;
+        body {
+            background-image: url("images/spring.jpg");
+
         }
     </style>
 </head>
-<body style="background-color: whitesmoke">
+<body>
 <div th:insert="~{nav.html }"></div>
-<div class="container">
+<div style="margin-left: 10%;margin-top: 100px;margin-right: 30%">
 
-
-    <div class="container-fluid main" >
-    <div class="row" style="margin-top: 70px">
-        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+    <div class="container">
+        <div class="panel panel-info col-lg-8">
             <h2 style="font-size: 30px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起</h2>
-            <hr>
-
             <form action="/publish" method="post">
                 <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
@@ -39,25 +36,33 @@
                            autocomplete="off">
                 </div>
                 <div class="form-group" id="question-editor">
-                    <label for="description">问题补充 (必填，请参照右侧提示):</label>
+                    <label >问题补充 (必填，请参照右侧提示):</label>
                     <textarea name="description" id="description"
                               class="form-control"
                               cols=""
-                              rows="10">
+                              rows="20">
 
-                    </textarea>
+                                    </textarea>
                 </div>
                 <div class="form-group">
                     <label for="tag">添加标签:</label>
 
-                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"
-                           autocomplete="off"
-                           placeholder="输入标签，以，号分隔"
-                           onclick="showSelectTag()">
+<!--                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"-->
+<!--                           autocomplete="off"-->
+<!--                           placeholder="输入标签，以，号分隔"-->
+<!--                           onclick="showSelectTag()">-->
+                    <select name="tag" th:value="${tag}" id="tag" >
+                        <option value="">请选择一个城市</option>
+                        <option value="Java">Java</option>
+                        <option value="JVM">JVM</option>
+                        <option value="0571">杭州</option>
+                    </select>
 
 
+                </div>
                     <div style="font-size: 15px;text-align: center;margin-top: 15px">
-                        <span class="alert-danger" style="font-size: 15px" th:text="${usernull}">default message</span>
+                                                <span class="alert-danger" style="font-size: 15px"
+                                                      th:text="${usernull}">default message</span>
                         <span class="alert-danger" style="font-size: 20px" th:text="${titlenull}">default message</span>
                         <span class="alert-danger" th:text="${descriptionnull}">default message</span>
                         <span class="alert-danger" th:text="${tagnull}">default message</span>
@@ -65,27 +70,83 @@
                     </div>
 
 
-                </div>
+
 
             </form>
 
+
         </div>
-        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="font-size: 20px">
-            <br/>
-            <br/>
 
-            <h3>问题发起指南</h3>
-            <hr/>
-            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字 <br>
-            <hr/>
 
-            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料<br>
-            <hr/>
+        <!--        <div class="container-fluid main">-->
+        <!--            <div class="row" style="margin-top: 70px">-->
+        <!--                <div class="col-lg-1"></div>-->
+        <!--                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">-->
+        <!--                    <h2 style="font-size: 30px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起-->
+        <!--                    </h2>-->
+        <!--                    <hr>-->
 
-            • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字<br>
-        </div>
+        <!--                    <form action="/publish" method="post">-->
+        <!--                        <input type="hidden" name="id" th:value="${id}">-->
+        <!--                        <div class="form-group">-->
+        <!--                            <label for="title">问题标题（简单扼要）:</label>-->
+        <!--                            <input type="text" class="form-control" th:value="${title}" id="title" name="title"-->
+        <!--                                   placeholder="问题标题……"-->
+        <!--                                   autocomplete="off">-->
+        <!--                        </div>-->
+        <!--                        <div class="form-group" id="question-editor">-->
+        <!--                            <label for="description">问题补充 (必填，请参照右侧提示):</label>-->
+        <!--                            <textarea name="description" id="description"-->
+        <!--                                      class="form-control"-->
+        <!--                                      cols=""-->
+        <!--                                      rows="10">-->
+
+        <!--                    </textarea>-->
+        <!--                        </div>-->
+        <!--                        <div class="form-group">-->
+        <!--                            <label for="tag">添加标签:</label>-->
+
+        <!--                            <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"-->
+        <!--                                   autocomplete="off"-->
+        <!--                                   placeholder="输入标签，以，号分隔"-->
+        <!--                                   onclick="showSelectTag()">-->
+
+
+        <!--                            <div style="font-size: 15px;text-align: center;margin-top: 15px">-->
+        <!--                                <span class="alert-danger" style="font-size: 15px"-->
+        <!--                                      th:text="${usernull}">default message</span>-->
+        <!--                                <span class="alert-danger" style="font-size: 20px" th:text="${titlenull}">default message</span>-->
+        <!--                                <span class="alert-danger" th:text="${descriptionnull}">default message</span>-->
+        <!--                                <span class="alert-danger" th:text="${tagnull}">default message</span>-->
+        <!--                                <button type="submit" class="btn btn-success btn-publish ">发布</button>-->
+        <!--                            </div>-->
+
+
+        <!--                        </div>-->
+
+        <!--                    </form>-->
+
+        <!--                </div>-->
+
+        <!--&lt;!&ndash;                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="font-size: 15px">&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+
+
+        <!--&lt;!&ndash;                    <h6>问题发起指南</h6>&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <hr/>&ndash;&gt;-->
+        <!--&lt;!&ndash;                    • 问题标题: 请用精简的语言描述您发布的问题，不超过25字 <br>&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <hr/>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;                    • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料<br>&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <hr/>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;                    • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字<br>&ndash;&gt;-->
+        <!--&lt;!&ndash;                </div>&ndash;&gt;-->
+        <!--               -->
+        <!--            </div>-->
+        <!--        </div>-->
+
     </div>
-</div>
 
 </div>
 </body>

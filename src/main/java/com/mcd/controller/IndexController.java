@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 
 /**
  * Created by MaoChenDong on 2020/3/22.
@@ -65,6 +62,31 @@ public class IndexController {
       }catch (Exception e){
           System.out.println("读文件异常");
          // e.printStackTrace();
+      }finally {
+          try {
+              if(null!=bw)
+                  bw.close();
+          } catch (IOException e) {
+              System.out.println("关闭selAllJson IO流异常");
+          }
+          try {
+              if(null!=fw)
+                  fw.close();
+          } catch (IOException e) {
+              System.out.println("关闭selAllJson IO流异常");
+          }
+          try {
+              if(null!=br)
+                  br.close();
+          } catch (IOException e) {
+              System.out.println("关闭selAllJson IO流异常");
+          }
+          try {
+              if(null!=fr)
+                  fr.close();
+          } catch (IOException e) {
+              System.out.println("关闭selAllJson IO流异常");
+          }
       }
       return "index";
   }
