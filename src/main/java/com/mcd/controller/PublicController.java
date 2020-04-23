@@ -61,11 +61,11 @@ public class PublicController {
             model.addAttribute("titlenull","标题不能为空");
             return "publish";
         }
-        if(title == null || title.equals("")){
+        if(description == null || description.equals("")){
             model.addAttribute("descriptionnull","内容不能为空");
             return "publish";
         }
-        if(title == null || title.equals("")){
+        if(tag == null || tag.equals("")){
             model.addAttribute("tagnull","标签不能为空");
             return "publish";
         }
@@ -80,7 +80,7 @@ public class PublicController {
         question.setGmt_create(System.currentTimeMillis());
         question.setGmt_modified(question.getGmt_create());
         questionMapper.create(question);
-
+        model.addAttribute("insertSuccess","200");
 
 
         return "redirect:/";

@@ -66,62 +66,8 @@ public class BlogContextControlltr {
 
     public  String selAllQuestionG(Model model) {
         List<Question> questions = questionMapper.sellAllQuestion();
+        model.addAttribute("questions",questions);
 
-
-        String jsonPre ="{\n" +
-                "  \"code\": 0,\n" +
-                "  \"msg\": null,\n" +
-                "\n" +
-                "  \"data\": " ;
-
-        String jsonNext = "}";
-        String json = JSONObject.toJSONString(questions);
-        String tranjson=jsonPre+json+jsonNext;
-        System.out.println(tranjson);
-        FileReader fr=null;
-        BufferedReader br= null;
-        FileWriter fw = null;
-        BufferedWriter bw = null;
-        try{
-
-            fr = new FileReader("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/json/selAllBlogContext.json");
-            br=new BufferedReader(fr);
-
-
-
-            fw = new FileWriter("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/json/selAllBlogContext.json",false);
-            bw = new BufferedWriter(fw);
-            bw.write(tranjson);
-            bw.flush();
-        }catch (Exception e){
-            System.out.println("读selAllBlogContext异常");
-             e.printStackTrace();
-        }finally {
-            try {
-                if(null!=bw)
-                bw.close();
-            } catch (IOException e) {
-                System.out.println("关闭selAllJson IO流异常");
-            }
-            try {
-                if(null!=fw)
-                fw.close();
-            } catch (IOException e) {
-                System.out.println("关闭selAllJson IO流异常");
-            }
-            try {
-                if(null!=br)
-                br.close();
-            } catch (IOException e) {
-                System.out.println("关闭selAllJson IO流异常");
-            }
-            try {
-                if(null!=fr)
-                fr.close();
-            } catch (IOException e) {
-                System.out.println("关闭selAllJson IO流异常");
-            }
-        }
 
         return  "selAllQuestion";
 

@@ -50,6 +50,7 @@
         <ul>
 
             <li th:if="${ null != session.user}">
+
                 <a th:text="${session.user.getUsername() }">aa</a></a>
                 <dl class="layui-nav-child">
                     <dd><a href="/publish">添加博文</a></dd>
@@ -58,9 +59,7 @@
                     <dd><a href="javascript:;">退了</a></dd>
                 </dl>
             </li>
-            <li th:if="${session.user == null}">
-                <a href="/login">登陆</a>
-            </li>
+
 
         </ul>
 

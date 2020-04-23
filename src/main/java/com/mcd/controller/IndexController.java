@@ -1,7 +1,9 @@
 package com.mcd.controller;
 
+import com.mcd.dto.QuestionDTO;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.User;
+import com.mcd.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.util.List;
 
 /**
  * Created by MaoChenDong on 2020/3/22.
@@ -20,6 +23,10 @@ import java.io.*;
 public class IndexController {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    private QuestionService questionService;
+
+
 
   @GetMapping("/")
     public String index(HttpServletRequest request,
@@ -88,26 +95,13 @@ public class IndexController {
               System.out.println("关闭selAllJson IO流异常");
           }
       }
+
+      List<QuestionDTO> questionDTOList = questionService.list();
+      model.addAttribute("questions",questionDTOList);
+
       return "index";
   }
 
-//
-//        for(Cookie cookie:cookies){
-//            if(cookie.getName().equals("token")){
-//                String token=cookie.getValue();
-//                try{
-//                    User user=userMapper.findByToken(token);
-//                    request.getSession().setAttribute("user",user);
-//                    System.out.println("user+"+user);
-//                }catch (Exception e){
-//                    System.out.println("no execute");
-//                    return "index";
-//                }
-//
-//
-//                break;
-//            }
-//        }
 
 
 
@@ -165,6 +159,11 @@ public class IndexController {
         model.addAttribute("message","my is mass age");
         return "nav_bottom_left_text";
     }
+
+
+
+
+
 
 
 }

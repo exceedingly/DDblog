@@ -47,7 +47,7 @@ public class ManageController {
         }
         if (user == null) {
             model.addAttribute("usernull", "请登录");
-            return "manage";
+            return "login";
         }
 
         User u = userMapper.findByToken("1323086220");
