@@ -33,8 +33,8 @@ public class loginController {
 
         String u = request.getParameter("u");
         String p = request.getParameter("p");
-        String token =  UUID.randomUUID().toString();
-        System.out.println(u);
+//        String token =  UUID.randomUUID().toString();
+        System.out.println("u is"+u);
         System.out.println(p);
         User user = new User();
         user.setUsername(u);
@@ -49,7 +49,7 @@ public class loginController {
 
             }else{
                 System.out.println("数据库没有");
-                return "redirect:/";
+                return "";
             }
         }catch (Exception e){
             e.printStackTrace();

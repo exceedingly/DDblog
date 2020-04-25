@@ -3,8 +3,10 @@ package com.mcd.mapper;
 import com.mcd.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,4 +16,10 @@ public interface QuestionMapper {
     public void create(Question question);
     @Select("Select * from question")
     public List<Question> sellAllQuestion();
+
+    @Select("select * from question limit #{offset},#{size}")
+    public List<Question> list(@Param(value = "offset") Integer offset, @Param(value = "size") Integer size);
+
+    @Select("select count(1) from question")
+    Integer count();
 }

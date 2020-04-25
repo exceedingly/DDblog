@@ -7,10 +7,8 @@
     <title>开始使用layui</title>
     <link rel="stylesheet" href="css/layui.css">
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
     <link rel="stylesheet" href="css/community.css">
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 
 
 
@@ -29,19 +27,20 @@
 
 
 <ul class="layui-nav" style="position: fixed;top: 0;z-index: 9997">
-    <li class="layui-nav-item" style="margin-left: 100px">最新活动</li>
+    <li class="layui-nav-item" style="margin-left: 100px"><a href="/nav">首页</a></li>
+    <li class="layui-nav-item" ><a href="/">博客内容</a></li>
 
 
-    <li class="layui-nav-item layui-this"><a href="">产品</a></li>
-    <li class="layui-nav-item"><a href="">大数据</a></li>
-    <li class="layui-nav-item">
-        <a href="javascript:;">解决方案</a>
-        <dl class="layui-nav-child"> <!-- 二级菜单 -->
-            <dd><a href="">移动模块</a></dd>
-            <dd><a href="">后台模版</a></dd>
-            <dd><a href="">电商平台</a></dd>
-        </dl>
-    </li>
+<!--    <li class="layui-nav-item layui-this"><a href="">产品</a></li>-->
+<!--    <li class="layui-nav-item"><a href="">大数据</a></li>-->
+<!--    <li class="layui-nav-item">-->
+<!--        <a href="javascript:;">解决方案</a>-->
+<!--        <dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;-->
+<!--            <dd><a href="">移动模块</a></dd>-->
+<!--            <dd><a href="">后台模版</a></dd>-->
+<!--            <dd><a href="">电商平台</a></dd>-->
+<!--        </dl>-->
+<!--    </li>-->
     <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/manage">后台</a></li>
     <li class="layui-nav-item" lay-unselect="" >
 
@@ -50,8 +49,7 @@
         <ul>
 
             <li th:if="${ null != session.user}">
-
-                <a th:text="${session.user.getUsername() }">aa</a></a>
+                <a th:text="${session.user.getUsername() }">aa</a>
                 <dl class="layui-nav-child">
                     <dd><a href="/publish">添加博文</a></dd>
                     <dd><a href="javascript:;">修改信息</a></dd>
@@ -59,7 +57,9 @@
                     <dd><a href="javascript:;">退了</a></dd>
                 </dl>
             </li>
-
+            <li th:if="${session.user == null}">
+                <a href="/login">登陆/后台</a>
+            </li>
 
         </ul>
 
@@ -105,10 +105,10 @@
             <!-- use captain icon for toggle menu -->
             <div id="hamburgermenu">
                 <ul style="z-index: 9999">
-                    <li><a href="#">首页</a></li>
-                    <li><a href="#">学习日志</a></li>
-                    <li><a href="#">时光轴</a></li>
-                    <li><a href="#">教育背景</a></li>
+                    <li><a href="/nav">首页</a></li>
+                    <li><a href="/">学习笔记</a></li>
+                    <li><a href="/index4">时光轴</a></li>
+                    <li><a href="/persion">个人介绍</a></li>
                     <li><a href="#">致谢</a></li>
                 </ul>
             </div>
@@ -121,7 +121,7 @@
 </div>
 
 </body>
-</html>
+
 
 <!-- 你的HTML代码 -->
 
@@ -135,5 +135,5 @@
         // layer.msg('Hello World');
     });
 </script>
-</body>
+
 </html>

@@ -18,7 +18,7 @@ import java.util.UUID;
 /**
  * Created by MaoChenDong on 2020/3/23.
  */
-@Controller("")
+@Controller()
 public class ManageController {
 
     @Autowired

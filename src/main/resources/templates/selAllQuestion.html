@@ -13,7 +13,41 @@
 
 </head>
 <body>
-<table class="layui-hide" id="layListId" lay-filter="layList"></table>
+
+
+<table class="layui-table">
+    <colgroup>
+        <col width="150">
+        <col width="200">
+        <col>
+    </colgroup>
+    <thead>
+    <tr>
+        <th>名称</th>
+        <th>标签</th>
+<!--        <th>a</th>-->
+
+    </tr>
+    </thead>
+    <tbody th:each="q:${questions}">
+    <tr>
+        <td th:text="${q.title}">贤心</td>
+        <td th:text="${q.tag}">贤心</td>
+
+
+
+
+<!--        <td><div class="layui-btn-group">-->
+<!--            <button type="button" class="layui-btn">增加</button>-->
+<!--            <button type="button" class="layui-btn">编辑</button>-->
+<!--            <button type="button" class="layui-btn">删除</button>-->
+<!--        </div></td>-->
+    </tr>
+    </tbody>
+</table>
+
+<div id="test1"></div>
+
 
 <script src="js/layui.all.js"></script>
 <script>
@@ -24,100 +58,21 @@
 
         // layer.msg('Hello World');
     });
+
 </script>
+
 <script>
-    layui.use('table', function() {
-        var table = layui.table;
-        table.render({
-            elem: '#layListId',
-            id: 'layTableId',
+    //分页js
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
 
-            url: '/selAllQuestion',
-            title: '维修保养报',
-            cellMinWidth: 100,
-            cols: [
-                [{
-                    type: 'checkbox',
-                    fixed: 'left'
-                }, {
-                    type: 'numbers',
-                    fixed: 'left'
-                }, {
-                    field: 'title',
-                    title: 'title',
-                    minWidth: '120'
-                }, {
-                    field: 'tag',
-                    title: 'tag',
-                    minWidth: '120'
-                }, {
-                    field: 'creator',
-                    title: 'creator'
-                }]
-            ],
-            page: false
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+            ,count: 50 //数据总数，从服务端得到
+            ,limit:5
         });
-        //监听工具条
-        table.on('tool(layList)', function(obj) {
-            var data = obj.data; //获得当前行数据
-            switch(obj.event) {
-                case 'maintainRecord':
-                    maintainRecord();
-                    break;
-                case 'repairRecord':
-                    repairRecord();
-                    break;
-                default:
-                    break;
-            }
-
-        });
-        var $ = layui.$,
-            active = {
-                reload: function() {
-                    var deviceNumber = $("#deviceNumber").val();
-
-                    //执行重载
-                    table.reload('layTableId', {
-                        page: {
-                            curr: 1
-                        },
-                        where: {
-                            deviceNumber: deviceNumber
-                        }
-                    });
-                },
-                getCheckData: function() { //获取选中数据
-                    var checkStatus = table.checkStatus('layTableId'),
-                        data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
-                },
-                getCheckLength: function() { //获取选中数目
-                    var checkStatus = table.checkStatus('layTableId'),
-                        data = checkStatus.data;
-                    layer.msg('选中了：' + data.length + ' 个');
-                },
-                isAll: function() { //验证是否全选
-                    var checkStatus = table.checkStatus('layTableId');
-                    layer.msg(checkStatus.isAll ? '全选' : '未全选')
-                }
-
-            };
-        $('.layui-btn').on('click', function() {
-            var type = $(this).data('type');
-            active[type] && active[type].call(this);
-        });
-
-        function maintainRecord() {
-            layer.msg("保养记录");
-        };
-
-        function repairRecord() {
-            layer.msg("维修记录");
-
-        };
     });
-
 </script>
 </body>
 

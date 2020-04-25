@@ -1,5 +1,6 @@
 package com.mcd.controller;
 
+import com.mcd.dto.PageInfoDTO;
 import com.mcd.dto.QuestionDTO;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.User;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +32,8 @@ public class IndexController {
 
   @GetMapping("/")
     public String index(HttpServletRequest request,
+                        @RequestParam(name="page",defaultValue = "1") Integer page,
+                        @RequestParam(name="size",defaultValue = "5") Integer size,
                         Model model){
       System.out.println("处理/逻辑");
       Cookie[] cookies = request.getCookies();
@@ -96,9 +100,13 @@ public class IndexController {
           }
       }
 
-      List<QuestionDTO> questionDTOList = questionService.list();
-      model.addAttribute("questions",questionDTOList);
+     PageInfoDTO  pageinfo = questionService.list(page,size);
+      List<QuestionDTO> questions = pageinfo.getQuestion();
 
+      model.addAttribute("pageinfo",pageinfo);
+      System.out.println(pageinfo);
+      model.addAttribute("questions",questions);
+      System.out.println(questions);
       return "index";
   }
 
@@ -113,14 +121,20 @@ public class IndexController {
 
         return "nav_bottom_left_text";
     }
+    @GetMapping(value="/nav")
+    public String nav(Model model) {
 
 
-    @GetMapping(value="/zh")
-    public String zh(Model model) {
-
-
-        return "zh";
+        return "nav";
     }
+    @GetMapping(value="/index4")
+    public String index4() {
+
+
+        return "/index4";
+    }
+
+
 
 
     @GetMapping("/mcd")
@@ -148,11 +162,18 @@ public class IndexController {
 //        return "error";
 //    }
     @GetMapping("/login")
-    public String Login(Model model
+    public String Login(
                        ){
-        model.addAttribute("message","my is mass age");
+
 
         return "login";
+    }
+    @GetMapping("/persion")
+    public String persion(
+    ){
+
+
+        return "persion";
     }
     @GetMapping("/nav_bottom_left_text")
     public String nav_bottom_left_text(Model model){
