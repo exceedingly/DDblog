@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>开始使用layui</title>
+    <title>东东博客</title>
+    <link rel="icon" href="images/4.png" sizes="32x32">
     <link rel="stylesheet" href="css/layui.css">
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
 
@@ -52,7 +53,7 @@
                 <a th:text="${session.user.getUsername() }">aa</a>
                 <dl class="layui-nav-child">
                     <dd><a href="/publish">添加博文</a></dd>
-                    <dd><a href="javascript:;">修改信息</a></dd>
+                    <dd><a href="/profile/questions">我发起的</a></dd>
                     <dd><a href="javascript:;">安全管理</a></dd>
                     <dd><a href="javascript:;">退了</a></dd>
                 </dl>
@@ -72,7 +73,7 @@
     </li>
 
     <li class="layui-nav-item" style="text-align: right;float: right">
-        <div id="J1YQ" style="font-size: 15px;width: 300px;margin-left: 150px;font-size: 13px">访问量：<span
+        <div  style="font-size: 15px;width: 300px;margin-left: 150px;font-size: 13px">访问量：<span
                 th:text="${message}">default message</span>
 
             <span id="runtime_span"></span>
@@ -89,7 +90,7 @@
                 c = (b - B) * 60;
                 C = Math.floor((b - B) * 60);
                 D = Math.floor((c - C) * 60);
-                runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒"
+                runtime_span.innerHTML = "本站运行: " + A + "天" + B + "小时" + C + "分" + D + "秒"
             }
 
             show_runtime();</script>

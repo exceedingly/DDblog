@@ -54,4 +54,45 @@ public class QuestionService {
     }
 
 
+    public PageInfoDTO list(String userId, Integer page, Integer size) {
+        PageInfoDTO pageInfoDTO = new PageInfoDTO();
+        Integer totalCount = questionMapper.countByUserId(userId);
+        pageInfoDTO.setPagination(totalCount,page,size);
+        if(page>pageInfoDTO.getPage()){
+            page=pageInfoDTO.getPage();
+        }
+        if(page<1){
+            page=1;
+        }
+
+
+
+        Integer offset = size*(page-1);
+
+
+        List<Question> questions = questionMapper.listUserId(userId,offset,size);
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+
+        //那好数据 给dto
+
+
+        for(Question question:questions){
+            User u = userMapper.findByToken(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(u);
+            questionDTOS.add(questionDTO);
+
+        }
+        //设置 pageinfo DTO内容
+        pageInfoDTO.setQuestion(questionDTOS);
+//        //数据总数
+//        Integer totalCount = questionMapper.count();
+//        //给你参数 你给我算 加工一下DTO主要是页面 页码现实问题
+//        pageInfoDTO.setPagination(totalCount,page,size);
+//        //dto加工完成
+
+        return pageInfoDTO;
+
+    }
 }

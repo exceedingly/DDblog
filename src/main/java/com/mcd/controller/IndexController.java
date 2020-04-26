@@ -36,6 +36,8 @@ public class IndexController {
                         @RequestParam(name="size",defaultValue = "5") Integer size,
                         Model model){
       System.out.println("处理/逻辑");
+
+
       Cookie[] cookies = request.getCookies();
       if (null != cookies) {
           for (Cookie cookie : cookies) {
@@ -51,13 +53,19 @@ public class IndexController {
       }else{
           System.out.println("cookie is null");
       }
+
+
+
+
+
+
       FileReader fr=null;
       BufferedReader br= null;
       FileWriter fw = null;
       BufferedWriter bw = null;
       try{
 
-          fr = new FileReader("/home/mcd/nums.txt");
+//          fr = new FileReader("/home/mcd/nums.txt");
 //          fr = new FileReader("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt");
           br=new BufferedReader(fr);
 

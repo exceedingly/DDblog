@@ -4,12 +4,18 @@
 
 <head>
     <meta charset="utf-8">
-    <title>选项卡组件</title>
+    <title>东东博客</title>
+    <link rel="icon" href="images/4.png" sizes="32x32">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="css/layui.css" media="all">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
 </head>
 <body>
@@ -29,8 +35,8 @@
 
     </tr>
     </thead>
-    <tbody th:each="q:${questions}">
-    <tr>
+    <tbody th:each="q:${questions}" >
+    <tr  >
         <td th:text="${q.title}">贤心</td>
         <td th:text="${q.tag}">贤心</td>
 
@@ -46,7 +52,30 @@
     </tbody>
 </table>
 
-<div id="test1"></div>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+        <li th:each="page:${pageinfo.pages}" th:class="${pageinfo.page==page}?'active':''">
+            <a
+                    th:href="@{/selAllQuestion/(page=${page})}" th:text="${page}"  >
+
+            </a>
+        </li>
+
+
+
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
 
 <script src="js/layui.all.js"></script>
@@ -61,19 +90,7 @@
 
 </script>
 
-<script>
-    //分页js
-    layui.use('laypage', function(){
-        var laypage = layui.laypage;
 
-        //执行一个laypage实例
-        laypage.render({
-            elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
-            ,count: 50 //数据总数，从服务端得到
-            ,limit:5
-        });
-    });
-</script>
 </body>
 
 </html>
