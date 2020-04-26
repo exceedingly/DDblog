@@ -23,7 +23,7 @@
 
 </head>
 
-<body style="background-image: url(images/spring.jpg)">
+<body style="background-image: url(/images/spring.jpg)">
 <div>
 
 
@@ -51,6 +51,7 @@
 
             <li th:if="${ null != session.user}">
                 <a th:text="${session.user.getUsername() }">aa</a>
+
                 <dl class="layui-nav-child">
                     <dd><a href="/publish">添加博文</a></dd>
                     <dd><a href="/profile/questions">我发起的</a></dd>
