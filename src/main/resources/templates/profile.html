@@ -34,8 +34,9 @@
         <div class="panel panel-info col-lg-8">
             <h2></h2>
             <div style="align-content: center">
-                <h2 style="font-size: 20px;float: left"><span class="glyphicon glyphicon-plus" aria-hidden="true"><span th:text="${sectionName}"></span>
+                <h2 style="font-size: 20px;float: left"><span class="glyphicon glyphicon-plus" aria-hidden="true"><span th:text="${sectionName}"></span></span></h2>
             </div>
+            <span th:text="${questions}"></span>
 
             </br>
 
@@ -43,6 +44,7 @@
 
 
             <div class="media border p-3" th:each="question:${questions}"   >
+
                 <div class="media-left">
                     <a href="#">
                         <img src="images/4.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:40px;">

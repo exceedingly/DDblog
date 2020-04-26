@@ -67,7 +67,8 @@ public class profileController {
         }
 
 
-        PageInfoDTO pageInfoDTO = questionService.list(user.getAccount_id(), page, size);
+        PageInfoDTO pageInfoDTO = questionService.listUserId(user.getToken(), page, size);
+        System.out.println("pageInfoDTO +"+pageInfoDTO);
         model.addAttribute("pageInfoDTO",pageInfoDTO);
         model.addAttribute("questions",pageInfoDTO.getQuestion());
 
