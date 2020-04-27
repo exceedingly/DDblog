@@ -1,5 +1,6 @@
 package com.mcd.mapper;
 
+import com.mcd.dto.QuestionDTO;
 import com.mcd.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,4 +29,6 @@ public interface QuestionMapper {
 
     @Select("select count(*) from question where creator = #{userId} ")
     Integer countByUserId(String userId);
+    @Select("SELECT * FROM question where id = #{id}")
+    Question getById(Integer id);
 }
