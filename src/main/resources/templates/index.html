@@ -1,227 +1,83 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<html>
+<html >
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>东东博客</title>
-    <link rel="icon" href="images/4.png" sizes="32x32">
+    <title>开始使用layui</title>
 
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style1.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/layui.css">
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/style1.css">
     <script type="text/javascript" src="js/menu.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
 
 <body>
-<div id="Layer1" style="position:absolute; width:100%; height:100%; z-index:-1">
-    <img src="images/spring.jpg" height="100%" width="100%"/>
-</div>
+<div th:insert="~{nav.html }"></div>
+
+<div class="container ">
 
 
-<div style="padding: 0px;" class="visible-lg">
-    <div th:insert="~{nav.html }"></div>
+    <div style="margin-top: 70px;" class="panel panel-info col-lg-10">
 
-    <div class="container ">
+        <div style="align-content: center">
+            <h2 style="font-size: 20px;float: left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>所有文章
+            </h2>
+
+        </div>
+
+        </br>
+
+        </hr>
 
 
-        <div style="margin-top: 70px;" class="panel panel-info col-lg-10">
+        <div class="media border p-3" th:each="question:${questions}"   >
+            <div class="media-left">
+                <a href="#">
+                    <img src="images/4.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:40px;">
 
-            <div style="align-content: center">
-                <h2 style="font-size: 20px;float: left"><span class="glyphicon glyphicon-plus"
-                                                              aria-hidden="true"></span>所有文章
-                </h2>
+                </a>
+            </div>
+            <div class="media-body" >
+                <h4 class="media-heading" th:text="${question.title}" style="font-size: 15px"></h4>
+                <span class="badge badge-pill badge-danger" style="background-color: #007DDB;float:right;font-size: 15px"
+                      th:text="${question.tag}">标签</span>
+                <span th:text="${question.description}" ></span><br>
+                <span class="text-desc" th:text="${question.commentCount}"></span>个回复 ·
+                <span th:text="${question.viewCount}"></span>次·浏览·<span
+                    th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
+
 
             </div>
+            <hr>
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
 
-            </br>
-
-            </hr>
-
-
-            <div class="media border p-3" th:each="question:${questions}">
-                <div class="media-left">
-                    <a href="#">
-                        <img src="images/4.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:40px;">
+                <li th:each="page:${pageinfo.pages}" th:class="${pageinfo.page==page}?'active':''">
+                    <a
+                            th:href="@{/(page=${page})}" th:text="${page}"  >
 
                     </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}" style="font-size: 15px"></h4>
-                    <span class="badge badge-pill badge-danger"
-                          style="background-color: #007DDB;float:right;font-size: 15px"
-                          th:text="${question.tag}">标签</span>
-                    <span th:text="${question.description}"></span><br>
-                    <span class="text-desc" th:text="${question.commentCount}"></span>个回复 ·
-                    <span th:text="${question.viewCount}"></span>次·浏览·<span
-                        th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
+                </li>
 
 
-                </div>
-                <hr>
-            </div>
-            <div>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
 
-                        <li th:each="page:${pageinfo.pages}" th:class="${pageinfo.page==page}?'active':''">
-                            <a
-                                    th:href="@{/(page=${page})}" th:text="${page}">
-
-                            </a>
-                        </li>
-
-
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-
-        </div>
-
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
-
-<div class="visible-xs">
-    <ul class="layui-nav">
-        <li>
-        <li class="layui-nav-item" style="text-align: left;float: left">
-            <div style="font-size: 15px;font-size: 13px">访问量：<span
-                    th:text="${message}">default message</span>
-
-
-            </div>
-        </li>
-        </li>
-
-        <span class="layui-nav-item" style="float: right">
-
-            <a href="javascript:;">菜单</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd>
-                      <span th:if="${ null != session.user}">
-                         <a th:text="Hello+${session.user.getUsername() }"></a>
-
-
-                     </span>
-                     <span th:if="${session.user == null}">
-                        <a href="/login">登陆/后台</a>
-                     </span>
-                </dd>
-        <dd><a href="/">所有文章</a></dd>
-
-        <dd><a href="/publish">发布文章</a></dd>
-        </dl>
-        </li>
-
-
-    </ul>
-    <div>
-        <div class="container ">
-
-
-            <div style="margin-top: 70px;" class="panel panel-info col-lg-10">
-
-                <div style="align-content: center">
-                    <h2 style="font-size: 20px;float: left"><span class="glyphicon glyphicon-plus"
-                                                                  aria-hidden="true"></span>所有文章
-                    </h2>
-
-                </div>
-
-                </br>
-
-                </hr>
-
-
-                <div class="media border p-3" th:each="question:${questions}">
-                    <div class="media-left">
-                        <a href="#">
-                            <img src="images/4.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:40px;">
-
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading" th:text="${question.title}" style="font-size: 15px"></h4>
-                        <span class="badge badge-pill badge-danger"
-                              style="background-color: #007DDB;float:right;font-size: 15px"
-                              th:text="${question.tag}">标签</span>
-                        <span th:text="${question.description}"></span><br>
-                        <span class="text-desc" th:text="${question.commentCount}"></span>个回复 ·
-                        <span th:text="${question.viewCount}"></span>次·浏览·<span
-                            th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
-
-
-                    </div>
-                    <hr>
-                </div>
-                <div>
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-
-                            <li th:each="page:${pageinfo.pages}" th:class="${pageinfo.page==page}?'active':''">
-                                <a
-                                        th:href="@{/(page=${page})}" th:text="${page}">
-
-                                </a>
-                            </li>
-
-
-                            <li>
-                                <a href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <div>
-        <span id="runtime_span"></span>
-        <script type="text/javascript">function show_runtime() {
-            window.setTimeout("show_runtime()", 1000);
-            X = new Date("3/28/2020 0:00:00");
-            Y = new Date();
-            T = (Y.getTime() - X.getTime());
-            M = 24 * 60 * 60 * 1000;
-            a = T / M;
-            A = Math.floor(a);
-            b = (a - A) * 24;
-            B = Math.floor(b);
-            c = (b - B) * 60;
-            C = Math.floor((b - B) * 60);
-            D = Math.floor((c - C) * 60);
-            runtime_span.innerHTML = "本站运行: " + A + "天" + B + "小时" + C + "分" + D + "秒"
-        }
-
-        show_runtime();</script>
-    </div>
-</div>
-
-
 </body>
 <script src="js/layui.all.js"></script>
 <script>
@@ -233,9 +89,7 @@
         // layer.msg('Hello World');
     });
 
-
 </script>
-
 
 </html>
 

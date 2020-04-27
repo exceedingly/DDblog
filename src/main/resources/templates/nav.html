@@ -8,10 +8,7 @@
     <link rel="icon" href="images/4.png" sizes="32x32">
     <link rel="stylesheet" href="css/layui.css">
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
-
     <link rel="stylesheet" href="css/community.css">
-
-
     <meta http-equiv="Content-Type" content="text/html">
 
     <meta name="author" content="Jake Rocheleau">
@@ -22,18 +19,28 @@
 
 </head>
 
-<body style="background-image: url(/images/spring.jpg);background-size: 100% 100%;background-repeat: no-repeat;">
-<!--//大屏幕-->
+<body style="background-image: url(/images/spring.jpg)">
 <div>
 
 
     <ul class="layui-nav" style="position: fixed;top: 0;z-index: 9997">
         <li class="layui-nav-item" style="margin-left: 100px"><a href="/nav">首页</a></li>
-        <li class="layui-nav-item"><a href="/">博客内容</a></li>
+        <li class="layui-nav-item" ><a href="/">博客内容</a></li>
 
 
+        <!--    <li class="layui-nav-item layui-this"><a href="">产品</a></li>-->
+        <!--    <li class="layui-nav-item"><a href="">大数据</a></li>-->
+        <!--    <li class="layui-nav-item">-->
+        <!--        <a href="javascript:;">解决方案</a>-->
+        <!--        <dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;-->
+        <!--            <dd><a href="">移动模块</a></dd>-->
+        <!--            <dd><a href="">后台模版</a></dd>-->
+        <!--            <dd><a href="">电商平台</a></dd>-->
+        <!--        </dl>-->
+        <!--    </li>-->
         <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/manage">后台</a></li>
-        <li class="layui-nav-item" lay-unselect="">
+        <li class="layui-nav-item" lay-unselect="" >
+
 
 
             <ul>
@@ -55,10 +62,15 @@
             </ul>
 
 
+
+
+
+
+
         </li>
 
         <li class="layui-nav-item" style="text-align: right;float: right">
-            <div style="font-size: 15px;width: 300px;margin-left: 150px;font-size: 13px">访问量：<span
+            <div  style="font-size: 15px;width: 300px;margin-left: 150px;font-size: 13px">访问量：<span
                     th:text="${message}">default message</span>
 
                 <span id="runtime_span"></span>
@@ -87,9 +99,7 @@
     <div id="pgcontainer">
 
         <div id="navbar">
-            <li class="layui-nav-item"><a href="#" class="menubtn "
-                                          style="position: fixed;top: 0;position: fixed;top: 0;z-index: 9998">MENU</a>
-            </li>
+            <li class="layui-nav-item">  <a href="#" class="menubtn " style="position: fixed;top: 0;position: fixed;top: 0;z-index: 9998">MENU</a></li>
             <!-- use captain icon for toggle menu -->
             <div id="hamburgermenu">
                 <ul style="z-index: 9999">
@@ -104,11 +114,9 @@
         <div class="overlay"></div>
 
 
+
     </div>
 </div>
-
-<!--//小屏幕-->
-
 
 </body>
 

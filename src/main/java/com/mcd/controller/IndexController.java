@@ -91,7 +91,7 @@ public class IndexController {
               if (cookie.getName().equals("token")) {
                   System.out.println(cookie.getValue());
                   User user = userMapper.findByToken(cookie.getValue());
-                  System.out.println("my is 过滤器 user  " + user);
+
                   request.getSession().setAttribute("user", user);
                   System.out.println(user);
                   break;

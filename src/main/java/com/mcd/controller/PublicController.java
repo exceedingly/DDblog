@@ -25,7 +25,12 @@ public class PublicController {
 
     @GetMapping("/publish")
     //get渲染页面
-    public String publish(){
+    public String publish( HttpServletRequest request){
+
+                    User user = (User)request.getSession().getAttribute("user");
+                   if(null ==user)
+                    return "login";
+
         return "publish";
     }
     @PostMapping("/publish")
