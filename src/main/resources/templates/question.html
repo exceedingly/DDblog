@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>东东博客</title>
     <link rel="icon" href="/images/4.png" sizes="32x32">
-    <link rel="stylesheet" href="css/style1.css">
-    <link rel="stylesheet" href="css/layui.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="/css/layui.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -23,41 +24,49 @@
 <body>
 <div th:insert="~{nav.html }"></div>
 
-<div class="container-fluid main profile" style="margin-top: 100px;background-color: whitesmoke">
-    <div class="row">
+<div style="margin-top: 100px;">
+    <div class="container">
+        <div class="panel panel-info col-lg-8" style="height: 300px;">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <!--正文-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4><span th:text="${question.title}"></span></h4>
+                    <span class="text-desc">
+                        作者：<span th:text="${question.user.username}"></span> |
+                        发布时间：<span th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
+                        阅读数： <span th:text="${question.viewCount}"></span>
+                    </span>
+                    <hr/>
 
-<!--        <div style="margin-top: 100px;background-color: whitesmoke"><span th:text="${question.user.username}"></span> </div>-->
-        左边主要内容
-        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-            <!--正文-->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h4 ><span th:text="${question.title}"></span></h4>
-                <span class="text-desc">
-                作者：<span th:text="${question.user.username}"></span> |
-                发布时间：<span th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
-                阅读数： <span th:text="${question.viewCount}"></span>
-            </span>
-        </div>
-
-        <!--右边信息块-->
-        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h4>发起人</h4>
-
+<!--                    正文-->
+                    <span th:text="${question.description}"></span>
+                    <hr/>
+                    <a class="glyphicon glyphicon-edit" style="font-size: 20px" aria-hidden="true"></a>编辑
+                    <hr/>
+                </div>
             </div>
-
-            <!--相关问题-->
-            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h4>相关问题</h4>
-                <ul class="question-related">
-                    <li th:each="related : ${relatedQuestions}">
-                        <a th:href="@{'/question/'+ ${related.id}}" th:text="${related.title}"></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div>
+<!--    //右-->
+        <div class="panel panel-info col-lg-3" style="margin-left: 5%;height: 300px">
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>发起人</h4>
+
+                </div>
+
+                <!--相关问题-->
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>相关问题</h4>
+                    <ul class="question-related">
+                        <li th:each="related : ${relatedQuestions}">
+                            <a th:href="@{'/question/'+ ${related.id}}" th:text="${related.title}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
 </div>
 
 
@@ -66,9 +75,18 @@
 
 
 
+
+
+
+</body>
+
+
+
+
+
 <!-- 你的HTML代码 -->
 
-<script src="js/layui.all.js"></script>
+<script src="/js/layui.all.js"></script>
 <script>
     //一般直接写在一个js文件中
     layui.use(['layer', 'form'], function () {
@@ -80,6 +98,4 @@
 
 
 </script>
-
-</body>
 </html>
