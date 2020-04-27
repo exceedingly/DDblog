@@ -33,21 +33,8 @@ public class profileController {
                           @RequestParam(name="size",defaultValue = "5") Integer size
                           ){
 
-        User user=null;
+        User user=(User) request.getSession().getAttribute("user");
         //登陆验证
-        Cookie[] cookies = request.getCookies();
-        if (null != cookies) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    System.out.println(cookie.getValue());
-                    user= userMapper.findByToken(cookie.getValue());
-                    System.out.println("my is user  "+ user);
-                    request.getSession().setAttribute("user",user);
-                    System.out.println(user);
-                    break;
-                }
-            }
-        }
 
         if (user == null) {
 

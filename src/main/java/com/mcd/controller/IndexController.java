@@ -35,37 +35,13 @@ public class IndexController {
                         @RequestParam(name="page",defaultValue = "1") Integer page,
                         @RequestParam(name="size",defaultValue = "5") Integer size,
                         Model model){
-      System.out.println("处理/逻辑");
-
-
-      Cookie[] cookies = request.getCookies();
-      if (null != cookies) {
-          for (Cookie cookie : cookies) {
-              if (cookie.getName().equals("token")) {
-                  System.out.println(cookie.getValue());
-                  User user = userMapper.findByToken(cookie.getValue());
-                  System.out.println("my is user  "+ user);
-                  request.getSession().setAttribute("user",user);
-                  System.out.println(user);
-                  break;
-              }
-          }
-      }else{
-          System.out.println("cookie is null");
-      }
-
-
-
-
-
-
       FileReader fr=null;
       BufferedReader br= null;
       FileWriter fw = null;
       BufferedWriter bw = null;
       try{
 
-//          fr = new FileReader("/home/mcd/nums.txt");
+          fr = new FileReader("/home/mcd/nums.txt");
 //          fr = new FileReader("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt");
           br=new BufferedReader(fr);
 
@@ -107,6 +83,23 @@ public class IndexController {
               System.out.println("关闭selAllJson IO流异常");
           }
       }
+
+
+      Cookie[] cookies = request.getCookies();
+      if (null != cookies) {
+          for (Cookie cookie : cookies) {
+              if (cookie.getName().equals("token")) {
+                  System.out.println(cookie.getValue());
+                  User user = userMapper.findByToken(cookie.getValue());
+                  System.out.println("my is 过滤器 user  " + user);
+                  request.getSession().setAttribute("user", user);
+                  System.out.println(user);
+                  break;
+              }
+          }
+      }
+
+
 
      PageInfoDTO  pageinfo = questionService.list(page,size);
       List<QuestionDTO> questions = pageinfo.getQuestion();

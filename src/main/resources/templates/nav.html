@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/community.css">
 
 
-
     <meta http-equiv="Content-Type" content="text/html">
 
     <meta name="author" content="Jake Rocheleau">
@@ -23,87 +22,74 @@
 
 </head>
 
-<body style="background-image: url(/images/spring.jpg)">
+<body style="background-image: url(/images/spring.jpg);background-size: 100% 100%;background-repeat: no-repeat;">
+<!--//大屏幕-->
 <div>
 
 
-<ul class="layui-nav" style="position: fixed;top: 0;z-index: 9997">
-    <li class="layui-nav-item" style="margin-left: 100px"><a href="/nav">首页</a></li>
-    <li class="layui-nav-item" ><a href="/">博客内容</a></li>
+    <ul class="layui-nav" style="position: fixed;top: 0;z-index: 9997">
+        <li class="layui-nav-item" style="margin-left: 100px"><a href="/nav">首页</a></li>
+        <li class="layui-nav-item"><a href="/">博客内容</a></li>
 
 
-<!--    <li class="layui-nav-item layui-this"><a href="">产品</a></li>-->
-<!--    <li class="layui-nav-item"><a href="">大数据</a></li>-->
-<!--    <li class="layui-nav-item">-->
-<!--        <a href="javascript:;">解决方案</a>-->
-<!--        <dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;-->
-<!--            <dd><a href="">移动模块</a></dd>-->
-<!--            <dd><a href="">后台模版</a></dd>-->
-<!--            <dd><a href="">电商平台</a></dd>-->
-<!--        </dl>-->
-<!--    </li>-->
-    <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/manage">后台</a></li>
-    <li class="layui-nav-item" lay-unselect="" >
+        <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/manage">后台</a></li>
+        <li class="layui-nav-item" lay-unselect="">
 
 
+            <ul>
 
-        <ul>
+                <li th:if="${ null != session.user}">
+                    <a th:text="${session.user.getUsername() }">aa</a>
 
-            <li th:if="${ null != session.user}">
-                <a th:text="${session.user.getUsername() }">aa</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/publish">添加博文</a></dd>
+                        <dd><a href="/profile/questions">我发起的</a></dd>
+                        <dd><a href="javascript:;">安全管理</a></dd>
+                        <dd><a href="javascript:;">退了</a></dd>
+                    </dl>
+                </li>
+                <li th:if="${session.user == null}">
+                    <a href="/login">登陆/后台</a>
+                </li>
 
-                <dl class="layui-nav-child">
-                    <dd><a href="/publish">添加博文</a></dd>
-                    <dd><a href="/profile/questions">我发起的</a></dd>
-                    <dd><a href="javascript:;">安全管理</a></dd>
-                    <dd><a href="javascript:;">退了</a></dd>
-                </dl>
-            </li>
-            <li th:if="${session.user == null}">
-                <a href="/login">登陆/后台</a>
-            </li>
-
-        </ul>
-
+            </ul>
 
 
+        </li>
+
+        <li class="layui-nav-item" style="text-align: right;float: right">
+            <div style="font-size: 15px;width: 300px;margin-left: 150px;font-size: 13px">访问量：<span
+                    th:text="${message}">default message</span>
+
+                <span id="runtime_span"></span>
+                <script type="text/javascript">function show_runtime() {
+                    window.setTimeout("show_runtime()", 1000);
+                    X = new Date("3/28/2020 0:00:00");
+                    Y = new Date();
+                    T = (Y.getTime() - X.getTime());
+                    M = 24 * 60 * 60 * 1000;
+                    a = T / M;
+                    A = Math.floor(a);
+                    b = (a - A) * 24;
+                    B = Math.floor(b);
+                    c = (b - B) * 60;
+                    C = Math.floor((b - B) * 60);
+                    D = Math.floor((c - C) * 60);
+                    runtime_span.innerHTML = "本站运行: " + A + "天" + B + "小时" + C + "分" + D + "秒"
+                }
+
+                show_runtime();</script>
+            </div>
+        </li>
+    </ul>
 
 
-
-
-    </li>
-
-    <li class="layui-nav-item" style="text-align: right;float: right">
-        <div  style="font-size: 15px;width: 300px;margin-left: 150px;font-size: 13px">访问量：<span
-                th:text="${message}">default message</span>
-
-            <span id="runtime_span"></span>
-            <script type="text/javascript">function show_runtime() {
-                window.setTimeout("show_runtime()", 1000);
-                X = new Date("3/28/2020 0:00:00");
-                Y = new Date();
-                T = (Y.getTime() - X.getTime());
-                M = 24 * 60 * 60 * 1000;
-                a = T / M;
-                A = Math.floor(a);
-                b = (a - A) * 24;
-                B = Math.floor(b);
-                c = (b - B) * 60;
-                C = Math.floor((b - B) * 60);
-                D = Math.floor((c - C) * 60);
-                runtime_span.innerHTML = "本站运行: " + A + "天" + B + "小时" + C + "分" + D + "秒"
-            }
-
-            show_runtime();</script>
-        </div>
-    </li>
-</ul>
-
-
-<div id="pgcontainer">
+    <div id="pgcontainer">
 
         <div id="navbar">
-            <li class="layui-nav-item">  <a href="#" class="menubtn " style="position: fixed;top: 0;position: fixed;top: 0;z-index: 9998">MENU</a></li>
+            <li class="layui-nav-item"><a href="#" class="menubtn "
+                                          style="position: fixed;top: 0;position: fixed;top: 0;z-index: 9998">MENU</a>
+            </li>
             <!-- use captain icon for toggle menu -->
             <div id="hamburgermenu">
                 <ul style="z-index: 9999">
@@ -118,9 +104,11 @@
         <div class="overlay"></div>
 
 
+    </div>
+</div>
 
-</div>
-</div>
+<!--//小屏幕-->
+
 
 </body>
 

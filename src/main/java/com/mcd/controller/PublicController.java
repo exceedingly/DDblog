@@ -37,22 +37,8 @@ public class PublicController {
             HttpServletRequest request,
             Model model){
 
-        User user = null;
-        Cookie[] cookies = request.getCookies();
-        if (null != cookies) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    System.out.println(cookie.getValue());
-                    user = userMapper.findByToken(cookie.getValue());
-                    System.out.println("my is user  "+ user);
-                    if(user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                    System.out.println(user);
-                    break;
-                }
-            }
-        }
+        User user = (User) request.getSession().getAttribute("user");
+
         if(user == null){
             model.addAttribute("usernull","请登录");
             return "publish";
