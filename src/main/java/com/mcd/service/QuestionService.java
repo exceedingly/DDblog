@@ -6,6 +6,7 @@ import com.mcd.mapper.QuestionMapper;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.Question;
 import com.mcd.model.User;
+import com.mcd.model.UserExample;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,10 +34,18 @@ public class QuestionService {
         PageInfoDTO pageInfoDTO = new PageInfoDTO();
 
         for(Question question:questions){
-            User u = userMapper.findByCreatorId(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question,questionDTO);
-            questionDTO.setUser(u);
+
+            UserExample userExample = new UserExample();
+            userExample.createCriteria().andAccountIdEqualTo(question.getCreator());
+            List<User> users = userMapper.selectByExample(userExample);
+            if(users.size()!=0){
+                questionDTO.setUser(users.get(0));
+            }else{
+                System.out.println("QuestionService 46 error");
+            }
+
             questionDTOS.add(questionDTO);
 
         }
@@ -77,10 +86,25 @@ public class QuestionService {
 
 
         for(Question question:questions){
-            User u = userMapper.findByCreatorId(question.getCreator());
+
+
+
+
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question,questionDTO);
-            questionDTO.setUser(u);
+
+
+            UserExample userExample = new UserExample();
+            userExample.createCriteria().andAccountIdEqualTo(question.getCreator());
+            List<User> users = userMapper.selectByExample(userExample);
+            if(users.size()!=0){
+
+                questionDTO.setUser(users.get(0));
+            }else{
+                System.out.println("QuestionService 104");
+            }
+
+
             questionDTOS.add(questionDTO);
 
         }
@@ -98,15 +122,22 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
 
-
+        QuestionDTO questionDTO = new QuestionDTO();
 
 
         Question question=questionMapper.getById(id);
+        UserExample userExample = new UserExample();
+        userExample.createCriteria()
+                .andAccountIdEqualTo(question.getCreator());
+        List<User> users = userMapper.selectByExample(userExample);
+        if(users.size()!=0){
+            questionDTO.setUser(users.get(0));
+        }else{
+            System.out.println("QuestionService 113行出错");
+        }
 
-        User userToken = userMapper.findByCreatorId(question.getCreator());
-        QuestionDTO questionDTO = new QuestionDTO();
 
-        questionDTO.setUser(userToken);
+
 
         BeanUtils.copyProperties(question,questionDTO);
 

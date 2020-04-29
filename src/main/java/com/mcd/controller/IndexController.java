@@ -4,6 +4,7 @@ import com.mcd.dto.PageInfoDTO;
 import com.mcd.dto.QuestionDTO;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.User;
+import com.mcd.model.UserExample;
 import com.mcd.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -92,11 +93,16 @@ public class IndexController {
           for (Cookie cookie : cookies) {
               if (cookie.getName().equals("token")) {
                   System.out.println(cookie.getValue());
-                  User user = userMapper.findByToken(cookie.getValue());
+                  UserExample userExample = new UserExample();
+                  userExample.createCriteria()
+                          .andTokenEqualTo(cookie.getValue());
+                  List<User> users = userMapper.selectByExample(userExample);
+//                  User user = userMapper.findByToken(cookie.getValue());
+                  if(users.size()!=0){
+                      request.getSession().setAttribute("user", users.get(0));
+                      break;
+                  }
 
-                  request.getSession().setAttribute("user", user);
-                  System.out.println(user);
-                  break;
               }
           }
       }
@@ -141,23 +147,7 @@ public class IndexController {
 
 
 
-    @GetMapping("/mcd")
-    public String getMassage(Model model){
-      try{
 
-              User user = (User)userMapper.findByToken("1323086220");
-
-              System.out.println(user);
-              model.addAttribute("message",user);
-
-      }catch (Exception e){
-          System.out.println("读取远程数据库失败");
-      }
-
-
-
-        return "mcd";
-    }
 
 //    @GetMapping("/error")
 //    public String error(Model model){

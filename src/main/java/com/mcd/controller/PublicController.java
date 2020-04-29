@@ -98,11 +98,11 @@ public class PublicController {
         question.setTag(tag);
         question.setId(id);
 
-        question.setCreator(user.getAccount_id());
+        question.setCreator(user.getUsername());
         question.setGmt_create(System.currentTimeMillis());
         question.setGmt_modified(question.getGmt_create());
         System.out.println(question);
-        questionService.createOrUpdate(question);
+        questionMapper.create(question);
         model.addAttribute("insertSuccess", "200");
 
 

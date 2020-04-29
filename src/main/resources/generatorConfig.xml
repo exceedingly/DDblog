@@ -6,26 +6,27 @@
 <generatorConfiguration>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        <jdbcConnection driverClass="com.mysql.jc.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/ddblog"
                         userId="root"
                         password="123456">
+            <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
         <javaTypeResolver >
-<!--            自动的 把 mysql-->
+            <!--            自动的 把 mysql-->
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
         <javaModelGenerator targetPackage="com.mcd.model" targetProject="src/main/java">
-<!--            生成Java模型  -->
-<!--               name="enableSubPackages" value="true"     如果 没有路径 就按照默认路径-->
+            <!--            生成Java模型  -->
+            <!--               name="enableSubPackages" value="true"     如果 没有路径 就按照默认路径-->
             <property name="enableSubPackages" value="true" />
-<!--            对数据执行是 是否去除空格-->
+            <!--            对数据执行是 是否去除空格-->
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-<!--        必须要写-->
+        <!--        必须要写-->
         <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
@@ -33,13 +34,9 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.mcd.mapper"  targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-<!--    必须要写-->
+        <!--    必须要写-->
         <table  tableName="user" domainObjectName="User" >
-<!--            <property name="useActualColumnNames" value="true"/>-->
-<!--            <generatedKey column="ID" sqlStatement="DB2" identity="true" />-->
-<!--            <columnOverride column="DATE_FIELD" property="startDate" />-->
-<!--            <ignoreColumn column="FRED" />-->
-<!--            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
+
         </table>
 
     </context>
