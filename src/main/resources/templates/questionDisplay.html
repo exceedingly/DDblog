@@ -30,18 +30,12 @@
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                 <!--正文-->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <hr/>
                     <h4><span th:text="${question.title}"></span></h4>
 
                     <hr/>
 
 <!--                    正文-->
-
-                    <h2>&nbsp;<span th:text="${question.description}"></span>
-
-                        <div class="form-group" id="question-editor">
-
-                    </div>
+                    <span th:text="${question.description}"></span>
                     <hr/>
                     <div th:if="${ null != session.user}">
                         <a th:href="@{'/publish/'+ ${question.id}}" class="glyphicon glyphicon-edit" style="font-size: 15px" aria-hidden="true" ></a>&nbsp;编辑|
@@ -66,7 +60,7 @@
                     <br/>
                     <h3>发起人</h3>
                     <span class="text-desc">
-<!--                        作者：<span th:text="${question.user.username}"></span>-->
+                        作者：<span th:text="${question.user.username}"></span>
 
                     </span>
 

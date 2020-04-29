@@ -4,10 +4,12 @@ import com.mcd.mapper.QuestionMapper;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.Question;
 import com.mcd.model.User;
+import com.mcd.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,9 +21,26 @@ import java.io.UnsupportedEncodingException;
 public class PublicController {
     @Autowired
     QuestionMapper questionMapper;
-
+    @Autowired
+    QuestionService questionService;
     @Autowired
     UserMapper userMapper;
+
+
+    @GetMapping("/publish/{id}")
+    //get渲染页面
+    public String edit(@PathVariable(name="id") Integer id,
+                       Model model) {
+
+        Question question = questionMapper.getById(id);
+        System.out.println(question);
+        model.addAttribute("title", question.getTitle());
+        model.addAttribute("id", question.getId());
+        model.addAttribute("description", question.getDescription());
+        model.addAttribute("tag", question.getTag());
+
+        return "publish";
+    }
 
 
     @GetMapping("/publish")
@@ -36,9 +55,9 @@ public class PublicController {
 
 
         User user = (User) request.getSession().getAttribute("user");
-        if (null == user)
+        if (null == user) {
             return "login";
-
+        }
         return "publish";
     }
 
@@ -48,8 +67,10 @@ public class PublicController {
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "tag", required = false) String tag,
+            @RequestParam(value = "id",required = false) Integer id,
             HttpServletRequest request,
-            Model model) {
+            Model model
+            ) {
 
         User user = (User) request.getSession().getAttribute("user");
 
@@ -75,11 +96,13 @@ public class PublicController {
         question.setTitle(title);
         question.setDescription(description);
         question.setTag(tag);
+        question.setId(id);
 
-        question.setCreator(user.getToken());
+        question.setCreator(user.getAccount_id());
         question.setGmt_create(System.currentTimeMillis());
         question.setGmt_modified(question.getGmt_create());
-        questionMapper.create(question);
+        System.out.println(question);
+        questionService.createOrUpdate(question);
         model.addAttribute("insertSuccess", "200");
 
 

@@ -44,16 +44,19 @@
             <hr/>
             <form action="/publish" method="post">
 
-                <div class="form-group">
-                    <label for="tag">添加标签:</label>
+                <div class="form-group" style="font-size: 15px">
+                    <span th:if="${tag}!=null">  <label for="tag">默认标签:</label></span>
 
+                    <span th:text="${tag}"></span>
+                    <br/>
+                    <label for="tag">新的标签:</label>
                     <!--                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"-->
                     <!--                           autocomplete="off"-->
                     <!--                           placeholder="输入标签，以，号分隔"-->
                     <!--                           onclick="showSelectTag()">-->
                     <select name="tag" th:value="${tag}" id="tag">
-                        <option value="">请选择一个标签</option>
-                        <option value="Java">Java</option>
+                        <option value="" >请选择一个标签</option>
+                        <option value="Java" >Java</option>
                         <option value="JVM">JVM</option>
                         <option value="Web">WEB</option>
                         <option value="Thread">并发</option>
@@ -78,7 +81,7 @@
                 </div>
                 <div class="form-group" id="question-editor">
                     <label>问题补充 (必填，请参照右侧提示):</label>
-                    <textarea name="description" id="description"
+                    <textarea th:text="${description}" name="description" id="description"
                               class="form-control"
                               cols=""
                               rows="15">
@@ -88,7 +91,13 @@
 
                 <div style="font-size: 15px;text-align: center;margin-top: 15px">
 
-                    <button type="submit" class="btn btn-success btn-publish ">发布</button>
+                    <span th:if="${tag == null}">
+                         <button type="submit" class="btn btn-success btn-publish ">发布</button>
+                    </span>
+                    <span th:if="${tag != null}">
+                         <button type="submit" class="btn btn-success btn-publish ">修改并提交</button>
+                    </span>
+
                 </div>
 
 

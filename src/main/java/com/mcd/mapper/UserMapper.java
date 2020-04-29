@@ -14,8 +14,10 @@ public interface UserMapper {
     @Select("select * from user where username = #{username} and password = #{password}")
     User selUser(User user);
 
-    @Select("select * from user where token = #{token}")
-    User findByToken(@Param("token") String token);
+    @Select("select * from user where account_id = #{CreatorId}")
+    User findByCreatorId(@Param("CreatorId") String CreatorId);
+    @Select("select * from user where token = #{Token}")
+    User findByToken(@Param("Token") String Token);
 
     @Update("UPDATE user SET token = #{token} WHERE token = #{id}")
     void updTokenByToken(String id,String token);

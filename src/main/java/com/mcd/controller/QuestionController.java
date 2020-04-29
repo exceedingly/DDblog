@@ -24,14 +24,12 @@ public class QuestionController {
     @Autowired
     UserMapper userMapper;
     @GetMapping("/question/{id}")
-    public String  question(@RequestParam(name = "id",defaultValue = "1") Integer id,
+    public String  question(@PathVariable(name="id") Integer id,
                             Model model,
                             HttpServletRequest request) {
 
 
-
-
-
+        System.out.println("id######################33"+id);
 
         QuestionDTO questionDTO=questionService.getById(id);
         model.addAttribute("question",questionDTO);

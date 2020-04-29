@@ -31,7 +31,7 @@ public class ManageController {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("token")) {
                     System.out.println(cookie.getValue());
-                    user = userMapper.findByToken(cookie.getValue());
+                    user = userMapper.findByCreatorId(cookie.getValue());
                     System.out.println("my is user  " + user);
                     if (user != null) {
                         request.getSession().setAttribute("user", user);
@@ -46,7 +46,7 @@ public class ManageController {
             return "login";
         }
 
-        User u = userMapper.findByToken("1323086220");
+        User u = userMapper.findByCreatorId(user.getAccount_id());
         model.addAttribute("user",u);
 
 

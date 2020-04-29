@@ -2,10 +2,7 @@ package com.mcd.mapper;
 
 import com.mcd.dto.QuestionDTO;
 import com.mcd.model.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +28,6 @@ public interface QuestionMapper {
     Integer countByUserId(String userId);
     @Select("SELECT * FROM question where id = #{id}")
     Question getById(Integer id);
+    @Update("update question set title=#{title} ,description=#{description},tag=#{tag},gmt_modified=#{gmt_modified} where id = #{id}")
+    void update(Question question);
 }
