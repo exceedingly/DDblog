@@ -2,7 +2,6 @@ package com.mcd.controller;
 
 import com.mcd.model.User;
 import com.mcd.service.UserService;
-import com.mcd.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,15 +18,16 @@ import java.util.UUID;
 @Controller
 public class loginController {
     @Autowired
-    UserService userService = new UserServiceImpl();
+    UserService userService;
+
 
     @PostMapping("/login")
     public String loginController(HttpServletRequest request,
                                   Model model,
                                   HttpServletResponse response){
 
-        StringBuffer requestURL = request.getRequestURL();
-        System.out.println(requestURL);
+//        StringBuffer requestURL = request.getRequestURL();
+//        System.out.println(requestURL);
 
 
 
@@ -40,12 +40,17 @@ public class loginController {
         user.setUsername(u);
         user.setPassword(p);
         try{
-            int i = userService.selUserByUser(user);
-            System.out.println("my is i:"+i);
-            if(i>0){
+            User newU = userService.selUserByUser(user);
+
+            if(null !=newU){
                 //此时登陆已经成功
-                System.out.println("写入cookie值");
-                response.addCookie(new Cookie("token","1323086220"));
+
+                String token = UUID.randomUUID().toString();
+               System.out.println("更新yoken"+newU.getToken());
+                userService.ChangeTokenByUserLogin(newU.getToken(),token);
+                System.out.println("更新结束"+token);
+
+                response.addCookie(new Cookie("token",token));
 
             }else{
                 System.out.println("数据库没有");

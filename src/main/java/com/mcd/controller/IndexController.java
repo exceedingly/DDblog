@@ -102,6 +102,7 @@ public class IndexController {
 
 
 
+
      PageInfoDTO  pageinfo = questionService.list(page,size);
       List<QuestionDTO> questions = pageinfo.getQuestion();
 
