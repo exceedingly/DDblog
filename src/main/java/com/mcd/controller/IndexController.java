@@ -48,7 +48,8 @@ public class IndexController {
           String count = (String)br.readLine();
           System.out.println("my is ##################"+count);
           String i  = Integer.toString(Integer.parseInt(count)+1);
-          model.addAttribute("message",i);
+          request.getSession().setAttribute("fangwenliang", i);
+//          model.addAttribute("fangwenliang",i);
 //          fw = new FileWriter("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt",false);
           fw = new FileWriter("/home/mcd/nums.txt",false);
           bw = new BufferedWriter(fw);

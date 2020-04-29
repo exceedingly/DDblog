@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}" style="font-size: 15px"></h4>
+                    <h4 class="media-heading" > <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a></h4>
                     <span class="badge badge-pill badge-danger"
                           style="background-color: #007DDB;float:right;font-size: 15px"
                           th:text="${question.tag}">标签</span>

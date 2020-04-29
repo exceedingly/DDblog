@@ -29,16 +29,6 @@
         <li class="layui-nav-item" ><a href="/">博客内容</a></li>
 
 
-        <!--    <li class="layui-nav-item layui-this"><a href="">产品</a></li>-->
-        <!--    <li class="layui-nav-item"><a href="">大数据</a></li>-->
-        <!--    <li class="layui-nav-item">-->
-        <!--        <a href="javascript:;">解决方案</a>-->
-        <!--        <dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;-->
-        <!--            <dd><a href="">移动模块</a></dd>-->
-        <!--            <dd><a href="">后台模版</a></dd>-->
-        <!--            <dd><a href="">电商平台</a></dd>-->
-        <!--        </dl>-->
-        <!--    </li>-->
         <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/manage">后台</a></li>
         <li class="layui-nav-item" lay-unselect="" >
 
@@ -72,7 +62,7 @@
 
         <li class="layui-nav-item" style="text-align: right;float: right">
             <div  style="font-size: 15px;width: 300px;margin-left: 150px;font-size: 13px">访问量：<span
-                    th:text="${message}">default message</span>
+                    th:text="${session.fangwenliang}">default message</span>
 
                 <span id="runtime_span"></span>
                 <script type="text/javascript">function show_runtime() {

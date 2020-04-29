@@ -15,7 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class profileController {
+public class ProfileController {
 
 
     @Autowired
@@ -26,7 +26,7 @@ public class profileController {
 
 
     @GetMapping("/profile/{action}")
-    public String profilr(@PathVariable(name="action") String action,
+    public String profile(@PathVariable(name="action") String action,
                           Model model,
                           HttpServletRequest request,
                           @RequestParam(name="page",defaultValue = "1") Integer page,
