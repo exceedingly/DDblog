@@ -5,8 +5,10 @@ import com.mcd.dto.QuestionDTO;
 import com.mcd.mapper.QuestionMapper;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.Question;
+import com.mcd.model.QuestionExample;
 import com.mcd.model.User;
 import com.mcd.model.UserExample;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +28,8 @@ public class QuestionService {
         //去数据库拿数据
         Integer offset = size*(page-1);
 
+        List<Question> questions = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
 
-        List<Question> questions = questionMapper.list(offset,size);
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
         //那好数据 给dto
@@ -38,7 +40,7 @@ public class QuestionService {
             BeanUtils.copyProperties(question,questionDTO);
 
             UserExample userExample = new UserExample();
-            userExample.createCriteria().andAccountIdEqualTo(question.getCreator());
+            userExample.createCriteria().andIdEqualTo(question.getCreator());
             List<User> users = userMapper.selectByExample(userExample);
             if(users.size()!=0){
                 questionDTO.setUser(users.get(0));
@@ -52,9 +54,10 @@ public class QuestionService {
         //设置 pageinfo DTO内容
         pageInfoDTO.setQuestion(questionDTOS);
         //数据总数
-        Integer totalCount = questionMapper.count();
-        //给你参数 你给我算 加工一下DTO主要是页面 页码现实问题
-        pageInfoDTO.setPagination(totalCount,page,size);
+
+//        Integer totalCount = questionMapper.count();
+//        //给你参数 你给我算 加工一下DTO主要是页面 页码现实问题
+//        pageInfoDTO.setPagination(totalCount,page,size);
         //dto加工完成
 
         return pageInfoDTO;
@@ -63,9 +66,14 @@ public class QuestionService {
     }
 
 
-    public PageInfoDTO listUserId(String userId, Integer page, Integer size) {
+    public PageInfoDTO listUserId(Integer userId, Integer page, Integer size) {
         PageInfoDTO pageInfoDTO = new PageInfoDTO();
-        Integer totalCount = questionMapper.countByUserId(userId);
+
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.createCriteria()
+                .andCreatorEqualTo(userId);
+        questionMapper.countByExample(new QuestionExample());
+        Integer totalCount = (int)questionMapper.countByExample(questionExample);
         pageInfoDTO.setPagination(totalCount,page,size);
         if(page>pageInfoDTO.getPage()){
             page=pageInfoDTO.getPage();
@@ -79,7 +87,13 @@ public class QuestionService {
         Integer offset = size*(page-1);
 
 
-        List<Question> questions = questionMapper.listUserId(userId,offset,size);
+
+           QuestionExample questionExample1= new QuestionExample();
+           questionExample1.createCriteria()
+                   .andCreatorEqualTo(userId);
+        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample1, new RowBounds(offset, size));
+
+
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
         //那好数据 给dto
@@ -95,7 +109,7 @@ public class QuestionService {
 
 
             UserExample userExample = new UserExample();
-            userExample.createCriteria().andAccountIdEqualTo(question.getCreator());
+            userExample.createCriteria().andIdEqualTo(question.getCreator());
             List<User> users = userMapper.selectByExample(userExample);
             if(users.size()!=0){
 
@@ -110,11 +124,19 @@ public class QuestionService {
         }
         //设置 pageinfo DTO内容
         pageInfoDTO.setQuestion(questionDTOS);
-//        //数据总数
-//        Integer totalCount = questionMapper.count();
-//        //给你参数 你给我算 加工一下DTO主要是页面 页码现实问题
-//        pageInfoDTO.setPagination(totalCount,page,size);
-//        //dto加工完成
+        //数据总数
+
+
+        QuestionExample questionExample2 = new QuestionExample();
+       questionExample2.createCriteria();
+        questionMapper.selectByExample(questionExample2);
+        long l = questionMapper.countByExample(questionExample2);
+        int totalCount2 = (int)l;
+        //给你参数 你给我算 加工一下DTO主要是页面 页码现实问题
+
+
+        pageInfoDTO.setPagination(totalCount2,page,size);
+        //dto加工完成
 
         return pageInfoDTO;
 
@@ -124,11 +146,18 @@ public class QuestionService {
 
         QuestionDTO questionDTO = new QuestionDTO();
 
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.createCriteria()
+                .andIdEqualTo(id);
+        List<Question> questions = questionMapper.selectByExample(questionExample);
+        Question question = null;
+        if(questions.size()!=0){
+            question = questions.get(0);
+        }
 
-        Question question=questionMapper.getById(id);
         UserExample userExample = new UserExample();
         userExample.createCriteria()
-                .andAccountIdEqualTo(question.getCreator());
+                .andIdEqualTo(question.getCreator());
         List<User> users = userMapper.selectByExample(userExample);
         if(users.size()!=0){
             questionDTO.setUser(users.get(0));
@@ -149,15 +178,21 @@ public class QuestionService {
 
     public void createOrUpdate(Question question){
         if(question.getId() == null){
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.insert(question);
 
-            //是新建
-            System.out.println("新建问题");
-            questionMapper.create(question);
+
         }else{
             System.out.println("修改");
-
-            question.setGmt_modified(question.getGmt_create());
-            questionMapper.update(question);
+            Question updateQuestion = new Question();
+            updateQuestion.setGmtModified(System.currentTimeMillis());
+            updateQuestion.setTitle(question.getTitle());
+            updateQuestion.setDescription(question.getDescription());
+            updateQuestion.setTag(question.getTag());
+            QuestionExample example = new QuestionExample();
+            example.createCriteria().andIdEqualTo(question.getId());
+            questionMapper.updateByExampleSelective(updateQuestion, example);
         }
     }
 }

@@ -52,7 +52,7 @@ public class ProfileController {
         }
 
 
-        PageInfoDTO pageInfoDTO = questionService.listUserId(user.getToken(), page, size);
+        PageInfoDTO pageInfoDTO = questionService.listUserId(user.getId(), page, size);
         System.out.println("pageInfoDTO +"+pageInfoDTO);
         model.addAttribute("pageInfoDTO",pageInfoDTO);
         model.addAttribute("questions",pageInfoDTO.getQuestion());

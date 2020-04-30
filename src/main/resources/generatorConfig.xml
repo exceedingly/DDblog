@@ -6,11 +6,12 @@
 <generatorConfiguration>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
-        <jdbcConnection driverClass="com.mysql.jc.jdbc.Driver"
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/ddblog"
                         userId="root"
                         password="123456">
-            <property name="nullCatalogMeansCurrent" value="true"/>
+
         </jdbcConnection>
 
         <javaTypeResolver >
@@ -35,9 +36,8 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
         <!--    必须要写-->
-        <table  tableName="user" domainObjectName="User" >
-
-        </table>
+        <table  tableName="user" domainObjectName="User" ></table>
+        <table  tableName="question" domainObjectName="Question" ></table>
 
     </context>
 </generatorConfiguration>

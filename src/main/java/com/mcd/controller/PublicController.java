@@ -3,6 +3,7 @@ package com.mcd.controller;
 import com.mcd.mapper.QuestionMapper;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.Question;
+import com.mcd.model.QuestionExample;
 import com.mcd.model.User;
 import com.mcd.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Controller()
 public class PublicController {
@@ -32,7 +34,10 @@ public class PublicController {
     public String edit(@PathVariable(name="id") Integer id,
                        Model model) {
 
-        Question question = questionMapper.getById(id);
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.createCriteria().andIdEqualTo(id);
+        List<Question> questions = questionMapper.selectByExample(questionExample);
+        Question question = questions.get(0);
         System.out.println(question);
         model.addAttribute("title", question.getTitle());
         model.addAttribute("id", question.getId());
@@ -98,11 +103,11 @@ public class PublicController {
         question.setTag(tag);
         question.setId(id);
 
-        question.setCreator(user.getUsername());
-        question.setGmt_create(System.currentTimeMillis());
-        question.setGmt_modified(question.getGmt_create());
+        question.setCreator(user.getId());
+        question.setGmtCreate(System.currentTimeMillis());
+        question.setGmtModified(question.getGmtCreate());
         System.out.println(question);
-        questionMapper.create(question);
+        questionMapper.insert(question);
         model.addAttribute("insertSuccess", "200");
 
 

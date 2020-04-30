@@ -29,7 +29,7 @@ public class QuestionController {
                             HttpServletRequest request) {
 
 
-        System.out.println("id######################33"+id);
+
 
         QuestionDTO questionDTO=questionService.getById(id);
         model.addAttribute("question",questionDTO);
