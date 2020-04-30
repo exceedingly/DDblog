@@ -112,7 +112,7 @@ public class IndexController {
 
      PageInfoDTO  pageinfo = questionService.list(page,size);
       List<QuestionDTO> questions = pageinfo.getQuestion();
-
+      System.out.println(pageinfo);
       model.addAttribute("pageinfo",pageinfo);
 
       model.addAttribute("questions",questions);
@@ -149,12 +149,6 @@ public class IndexController {
 
 
 
-//    @GetMapping("/error")
-//    public String error(Model model){
-//
-//
-//        return "error";
-//    }
     @GetMapping("/login")
     public String Login(
                        ){

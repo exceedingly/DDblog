@@ -57,7 +57,8 @@ public class QuestionService {
 
 //        Integer totalCount = questionMapper.count();
 //        //给你参数 你给我算 加工一下DTO主要是页面 页码现实问题
-//        pageInfoDTO.setPagination(totalCount,page,size);
+        int totalCount = (int)questionMapper.countByExample(new QuestionExample());
+        pageInfoDTO.setPagination(totalCount,page,size);
         //dto加工完成
 
         return pageInfoDTO;
