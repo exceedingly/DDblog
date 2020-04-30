@@ -5,6 +5,7 @@ import com.mcd.mapper.QuestionMapper;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.User;
 import com.mcd.service.QuestionService;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,7 @@ public class QuestionController {
 
 
         QuestionDTO questionDTO=questionService.getById(id);
+        System.out.println(questionDTO);
         model.addAttribute("question",questionDTO);
 
         return "question";

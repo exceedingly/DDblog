@@ -107,29 +107,7 @@
         <li class="layui-nav-item"><span>访问量：<span th:text="${message}">default message</span></span></li>
 
 
-        <li class="layui-nav-item" style="text-align: right;float: left">
-            <span  style="font-size: 15px;width: 300px;margin-left: 150px;font-size: 13px">
 
-
-                <script type="text/javascript">function show_runtime() {
-                    window.setTimeout("show_runtime()", 1000);
-                    X = new Date("3/28/2020 0:00:00");
-                    Y = new Date();
-                    T = (Y.getTime() - X.getTime());
-                    M = 24 * 60 * 60 * 1000;
-                    a = T / M;
-                    A = Math.floor(a);
-                    b = (a - A) * 24;
-                    B = Math.floor(b);
-                    c = (b - B) * 60;
-                    C = Math.floor((b - B) * 60);
-                    D = Math.floor((c - C) * 60);
-                    runtime_span.innerHTML = "运行: " + A + "天" + B + "小时" + C + "分" + D + "秒"
-                }
-
-                show_runtime();</script>
-            </span>
-        </li>
 
     </ul>
 <!--    身体-->
@@ -139,7 +117,7 @@
         <div style="margin-top: 70px;" class="panel panel-info col-lg-10">
 
             <div style="align-content: center">
-                <h2 style="font-size: 20px;float: left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>所有文章
+                <h2 style="font-size: 25px;float: left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>所有文章
                 </h2>
 
             </div>
@@ -156,10 +134,11 @@
 
                     </a>
                 </div>
-                <div class="media-body" >
-                    <h4 class="media-heading" th:text="${question.title}" style="font-size: 15px"></h4>
-                    <span class="badge badge-pill badge-danger" style="background-color: #007DDB;float:right;font-size: 15px"
+                <div class="media-body"  >
+                    <a style="font-size: 20px" th:href="@{'question/'+${question.id}}" th:text="${question.title}"></a>
+                    <span class="badge badge-pill badge-danger" style="background-color: #007DDB;float:right;font-size: 20px"
                           th:text="${question.tag}">标签</span>
+<!--                    主题就不写了-->
                     <span th:text="${question.description}" ></span><br>
                     <span class="text-desc" th:text="${question.commentCount}"></span>个回复 ·
                     <span th:text="${question.viewCount}"></span>次·浏览·<span

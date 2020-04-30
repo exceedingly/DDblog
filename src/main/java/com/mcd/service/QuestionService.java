@@ -27,8 +27,9 @@ public class QuestionService {
     public PageInfoDTO list(Integer page, Integer size){
         //去数据库拿数据
         Integer offset = size*(page-1);
-
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
+//        selectByExampleWithBLOBs
+//        List<Question> questions = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
+        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
 
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
@@ -150,7 +151,8 @@ public class QuestionService {
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria()
                 .andIdEqualTo(id);
-        List<Question> questions = questionMapper.selectByExample(questionExample);
+        List<Question> questions = questionMapper.selectByExampleWithBLOBs(questionExample);
+
         Question question = null;
         if(questions.size()!=0){
             question = questions.get(0);
@@ -168,9 +170,8 @@ public class QuestionService {
 
 
 
-
         BeanUtils.copyProperties(question,questionDTO);
-
+        questionDTO.setDescription(question.getDescription());
         return questionDTO;
     }
 

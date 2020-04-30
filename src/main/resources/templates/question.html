@@ -22,84 +22,83 @@
     </style>
 </head>
 <body>
-<div th:insert="~{nav.html }"></div>
+<div class="visible-ls">
+    <div th:insert="~{nav.html }"></div>
 
-<div style="margin-top: 100px; height: 100%">
-    <div class="container">
-        <div class="panel panel-info col-lg-8" style="height: 80%;">
-            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                <!--正文-->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <hr/>
-                    <h4><span th:text="${question.title}"></span></h4>
+    <div style="margin-top: 100px; height: 100%">
+        <div class="container">
+            <div class="panel panel-info col-lg-8" style="height: 80%;">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <!--正文-->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <hr/>
+                        <h4><span th:text="${question.title}"></span></h4>
 
-                    <hr/>
+                        <hr/>
 
-<!--                    正文-->
+                        <!--                    正文-->
 
-                    <h2>&nbsp;<span th:text="${question.description}"></span>
+                        <h2>&nbsp;<span th:text="${question.description}"></span>
 
-                        <div class="form-group" id="question-editor">
+                            <div class="form-group" id="question-editor">
 
+                            </div>
+                            <hr/>
+                            <div th:if="${ null != session.user}">
+                                <a th:href="@{'/publish/'+ ${question.id}}" class="glyphicon glyphicon-edit"
+                                   style="font-size: 15px" aria-hidden="true"></a>&nbsp;编辑|
+                                发布时间：<span th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
+                                阅读数： <span th:text="${question.viewCount}"></span>
+                            </div>
+                            <div th:if="${ null == session.user}">
+                                <a href="/login"> 登陆修改</a>
+                                发布时间：<span th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
+                                阅读数： <span th:text="${question.viewCount}"></span>
+                            </div>
+
+
+                            <hr/>
                     </div>
-                    <hr/>
-                    <div th:if="${ null != session.user}">
-                        <a th:href="@{'/publish/'+ ${question.id}}" class="glyphicon glyphicon-edit" style="font-size: 15px" aria-hidden="true" ></a>&nbsp;编辑|
-                       发布时间：<span th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
-                       阅读数： <span th:text="${question.viewCount}"></span>
-                    </div>
-                    <div th:if="${ null == session.user}">
-                       <a href="/login"> 登陆修改</a>
-                        发布时间：<span th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
-                        阅读数： <span th:text="${question.viewCount}"></span>
-                    </div>
 
-
-                    <hr/>
                 </div>
             </div>
-    </div>
-<!--    //右-->
-        <div class="panel panel-info col-lg-3" style="margin-left: 5%;height: 300px">
-            <div class=" col-lg-12 ">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <br/>
-                    <h3>发起人</h3>
-                    <span class="text-desc">
+            <!--    //右-->
+            <div class="panel panel-info col-lg-3" style="margin-left: 5%;height: 300px">
+                <div class=" col-lg-12 ">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <br/>
+                        <h3>发起人</h3>
+                        <span class="text-desc">
 <!--                        作者：<span th:text="${question.user.username}"></span>-->
 
                     </span>
 
-                </div>
+                    </div>
 
-                <!--相关问题-->
-                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h4>相关问题</h4>
-                    <ul class="question-related">
-                        <li th:each="related : ${relatedQuestions}">
-                            <a th:href="@{'/question/'+ ${related.id}}" th:text="${related.title}"></a>
-                        </li>
-                    </ul>13
+                    <!--相关问题-->
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h4>相关问题</h4>
+                        <ul class="question-related">
+                            <li th:each="related : ${relatedQuestions}">
+                                <a th:href="@{'/question/'+ ${related.id}}" th:text="${related.title}"></a>
+                            </li>
+                        </ul>
+                        13
+                    </div>
                 </div>
             </div>
+
         </div>
+
+    </div>
+</div>
+<!---->
+<div class="visible-xs">
 
 </div>
 
-
-
-
-
-
-
-
-
-
 </body>
-
-
-
 
 
 <!-- 你的HTML代码 -->
