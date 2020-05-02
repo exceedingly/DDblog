@@ -20,15 +20,17 @@
     <div class="container ">
 
 
-        <div style="margin-top: 70px;" class="panel panel-info col-lg-10">
+        <div style="margin-top: 70px;" class="panel panel-info col-lg-8">
 
             <div style="align-content: center">
+                <br/>
                 <h2 style="font-size: 20px;float: left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>所有文章
                 </h2>
+                <br/>
             <hr/>   
             </div>
 
-            </br>
+
 
             </hr>
 
@@ -40,16 +42,16 @@
 
                     </a>
                 </div>
-                <div class="media-body" >
+                <div class="media-body"  style="font-size: 15px">
                     <h4 class="media-heading"  style="font-size: 15px">
                         <a th:href="@{'question/'+${question.id}}" th:text="${question.title}"></a>
                     </h4>
-                    <span class="badge badge-pill badge-danger" style="background-color: #007DDB;float:right;font-size: 15px"
+                    <span class="badge badge-pill badge-danger" style="background-color: #007DDB;float:right;font-size: 20px"
                           th:text="${question.tag}">标签</span>
                     <span th:text="${question.description}" ></span><br>
                     <span class="text-desc" th:text="${question.commentCount}"></span>个回复 ·
                     <span th:text="${question.viewCount}"></span>次·浏览·<span
-                        th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
+                        th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
 
 
                 </div>
@@ -79,6 +81,10 @@
                     </li>
                 </ul>
             </nav>
+        </div>
+        <div style="margin-top: 70px;margin-left: 5%;" class="panel panel-info col-lg-3">
+
+         <标签分类></标签分类>
         </div>
     </div>
 </div>
@@ -142,7 +148,7 @@
                     <span th:text="${question.description}" ></span><br>
                     <span class="text-desc" th:text="${question.commentCount}"></span>个回复 ·
                     <span th:text="${question.viewCount}"></span>次·浏览·<span
-                        th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>
+                        th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
 
 
                 </div>

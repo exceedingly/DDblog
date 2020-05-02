@@ -64,7 +64,7 @@ public class loginController {
                 selByIdUserResult.setToken(token);
                 userMapper.updateByExample(selByIdUserResult,userExample1);
 
-
+                request.getSession().setAttribute("user",user);
 
                 response.addCookie(new Cookie("token",token));
 

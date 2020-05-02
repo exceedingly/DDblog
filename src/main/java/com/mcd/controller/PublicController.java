@@ -36,9 +36,9 @@ public class PublicController {
 
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria().andIdEqualTo(id);
-        List<Question> questions = questionMapper.selectByExample(questionExample);
+        List<Question> questions = questionMapper.selectByExampleWithBLOBs(questionExample);
         Question question = questions.get(0);
-        System.out.println(question);
+
         model.addAttribute("title", question.getTitle());
         model.addAttribute("id", question.getId());
         model.addAttribute("description", question.getDescription());
@@ -98,18 +98,35 @@ public class PublicController {
 
 
         Question question = new Question();
-        question.setTitle(title);
-        question.setDescription(description);
-        question.setTag(tag);
-        question.setId(id);
 
-        question.setCreator(user.getId());
-        question.setGmtCreate(System.currentTimeMillis());
-        question.setGmtModified(question.getGmtCreate());
-        System.out.println(question);
-        questionMapper.insert(question);
-        model.addAttribute("insertSuccess", "200");
 
+        if( id ==null){
+            question.setId(id);
+            //插入
+            question.setTitle(title);
+            question.setDescription(description);
+            question.setTag(tag);
+            question.setCreator(user.getId());
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+
+            questionMapper.insert(question);
+            model.addAttribute("insertSuccess", "200");
+
+        }else{
+           // 更新
+            question.setTag(tag);
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setDescription(description);
+
+
+            QuestionExample questionExample = new QuestionExample();
+            questionExample.createCriteria().andIdEqualTo(id);
+
+            model.addAttribute("insertSuccess", "200");
+        }
+
+        String result = "/question/"+id;
 
         return "redirect:/";
     }

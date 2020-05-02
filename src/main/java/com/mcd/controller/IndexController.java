@@ -98,10 +98,10 @@ public class IndexController {
                           .andTokenEqualTo(cookie.getValue());
                   List<User> users = userMapper.selectByExample(userExample);
 //                  User user = userMapper.findByToken(cookie.getValue());
-                  if(users.size()!=0){
+
                       request.getSession().setAttribute("user", users.get(0));
                       break;
-                  }
+
 
               }
           }
@@ -114,9 +114,15 @@ public class IndexController {
       List<QuestionDTO> questions = pageinfo.getQuestion();
       System.out.println(pageinfo);
       model.addAttribute("pageinfo",pageinfo);
-
+      for(QuestionDTO q:questions){
+          if(q.getDescription().length()>10){
+              String oldString = q.getDescription();
+              String newString = oldString.substring(0,10);
+              q.setDescription(newString);
+          }
+      }
       model.addAttribute("questions",questions);
-
+      System.out.println(questions);
       return "index";
   }
 

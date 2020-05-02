@@ -6,23 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>东东博客</title>
     <link rel="icon" href="images/4.png" sizes="32x32">
-    <link rel="stylesheet" href="css/layui.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="/css/layui.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+
+
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
 
     <meta http-equiv="Content-Type" content="text/html">
 
-    <meta name="author" content="Jake Rocheleau">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style1.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/menu.js"></script>
 
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style1.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/menu.js"></script>
+<!--    &lt;!&ndash; 引入样式 &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+<!--    &lt;!&ndash; 引入组件库 &ndash;&gt;-->
+<!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
 
 </head>
 <body class="layui-layout-body" style="background-color: whitesmoke">
@@ -31,18 +34,21 @@
         <div class="layui-logo">后台布局</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
 
+
+        <ul class="layui-nav layui-layout-right" style="float: right;text-align: right" > 回到首页</ul>
+
         <ul class="layui-nav layui-layout-right" style="float: right;text-align: right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    贤心
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+            <li class="layui-nav-item" th:if="${ null != session.user}" >
+                <a th:text="${session.user.getUsername() }">aa</a>
+
+                <dl class="layui-nav-child" style="background-color: #393D49">
+                    <dd><a href="/publish">添加博文</a></dd>
+                    <dd><a href="/profile/questions">我发起的</a></dd>
+                    <dd><a href="/nav">退了</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item" li th:if="${session.user == null}"> <a href="/login">登陆/后台</a></li>
+            <li class="layui-nav-item"><a href="/nav">退了</a></li>
         </ul>
     </div>
 
@@ -250,13 +256,11 @@
 
         <!-- 头部区域（可配合layui已有的水平导航） -->
 
-        <ul class="layui-nav layui-layout-right" style="float: right;text-align: right">
-            <li class="layui-nav-item" style="float: left">
-                <a href="javascript:;">菜单</a>
-                <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                    <dd th:if="${ null != session.user}">
-                        <a th:text="${session.user.getUsername() }">aa</a>
-                    </dd>
+        <ul class="layui-nav layui-layout-right" style="float: right;text-align: right" >
+            <li class="layui-nav-item" style="float: left" th:if="${ null != session.user}">
+                <a th:text="${session.user.getUsername() }">aa</a>
+                <dl class="layui-nav-child" >
+
                     <dd th:if="${session.user == null}">
                         <a href="/login">登陆/后台</a>
                     </dd>
@@ -319,12 +323,37 @@
 
             <!--           -->
         </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li th:each="page:${pageinfo.pages}" th:class="${pageinfo.page==page}?'active':''">
+                    <a
+                            th:href="@{/(page=${page})}" th:text="${page}"  >
+
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
         <div class="layui-footer">
             <!-- 底部固定区域 -->
             © layui.com - 底部固定区域
         </div>
     </div>
+
     <script src="js/layui.all.js"></script>
     <script>
         //JavaScript代码区域
@@ -370,6 +399,7 @@
 
                 element.tabAdd('mytab', {
                     title: text,
+
                     content: "<iframe frameborder='0' width='100%' height='100%' src='" + dataurl + "'></iframe>",
                     id: layid
                 });

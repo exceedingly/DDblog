@@ -1,21 +1,16 @@
 package com.mcd.controller;
 
 import com.mcd.dto.QuestionDTO;
-import com.mcd.mapper.QuestionMapper;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.User;
 import com.mcd.service.QuestionService;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.Action;
 
 @Controller
 public class QuestionController {
@@ -33,9 +28,31 @@ public class QuestionController {
 
 
         QuestionDTO questionDTO=questionService.getById(id);
-        System.out.println(questionDTO);
-        model.addAttribute("question",questionDTO);
 
+
+        //设置 不是同一个作者 只读
+
+        User u = (User)request.getSession().getAttribute("user");
+        if(u !=null){
+            Integer id1 = questionDTO.getUser().getId();
+            Integer id2 = u.getId();
+            if(id1.equals(id2)){
+
+
+                System.out.println("id == flag =1 ");
+                model.addAttribute("flag","1");
+            }
+            else{
+                System.out.println("id != flag =0");
+
+                model.addAttribute("flag","0");
+            }
+
+        }
+
+
+        model.addAttribute("user",questionDTO.getUser());
+        model.addAttribute("question",questionDTO);
         return "question";
     }
 }
