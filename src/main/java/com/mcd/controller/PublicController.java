@@ -115,13 +115,18 @@ public class PublicController {
 
         }else{
            // 更新
-            question.setTag(tag);
-            question.setGmtCreate(System.currentTimeMillis());
-            question.setDescription(description);
+
 
 
             QuestionExample questionExample = new QuestionExample();
             questionExample.createCriteria().andIdEqualTo(id);
+            List<Question> questions = questionMapper.selectByExampleWithBLOBs(questionExample);
+            questions.get(0).setTag(tag);
+            questions.get(0).setTitle(title);
+            questions.get(0).setDescription(description);
+
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+id "+id);
+            questionMapper.updateByExampleWithBLOBs(questions.get(0),questionExample);
 
             model.addAttribute("insertSuccess", "200");
         }

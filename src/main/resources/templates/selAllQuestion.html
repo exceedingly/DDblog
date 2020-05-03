@@ -10,47 +10,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" href="css/layui.css" media="all">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/layui.css" media="all">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
 
 </head>
-<body>
-
-
-<table class="layui-table">
-    <colgroup>
-        <col width="150">
-        <col width="200">
-        <col>
-    </colgroup>
+<body style="margin-left: 300px">
+<table class="table table-bordered">
+    <caption>边框表格布局</caption>
     <thead>
     <tr>
         <th>名称</th>
-        <th>标签</th>
-<!--        <th>a</th>-->
-
+        <th>标题</th>
+        <th>操作</th>
     </tr>
     </thead>
-    <tbody th:each="q:${questions}" >
-    <tr  >
-        <td th:text="${q.title}">贤心</td>
-        <td th:text="${q.tag}">贤心</td>
-
-
-
-
-<!--        <td><div class="layui-btn-group">-->
-<!--            <button type="button" class="layui-btn">增加</button>-->
-<!--            <button type="button" class="layui-btn">编辑</button>-->
-<!--            <button type="button" class="layui-btn">删除</button>-->
-<!--        </div></td>-->
+    <tbody th:each="q:${questions}">
+    <tr>
+        <td th:text="${q.title}"></td>
+        <td th:text="${q.title}"></td>
+        <td>560001</td>
     </tr>
+
     </tbody>
 </table>
+
+
+
+
 
 <nav aria-label="Page navigation">
     <ul class="pagination">
@@ -62,11 +51,11 @@
 
         <li th:each="page:${pageinfo.pages}" th:class="${pageinfo.page==page}?'active':''">
             <a
-                    th:href="@{/selAllQuestion/(page=${page})}" th:text="${page}"  >
+                    th:href="@{/selAllQuestion/(page=${page})}" th:text="${page}">
+
 
             </a>
         </li>
-
 
 
         <li>
@@ -78,7 +67,7 @@
 </nav>
 
 
-<script src="js/layui.all.js"></script>
+<script src="/js/layui.all.js"></script>
 <script>
     //一般直接写在一个js文件中
     layui.use(['layer', 'form'], function () {
@@ -88,8 +77,9 @@
         // layer.msg('Hello World');
     });
 
-</script>
 
+
+</script>
 
 </body>
 
