@@ -37,8 +37,13 @@ public class UserService {
                 User oldUser = users.get(0);
                 users.get(0).setToken(newStoken);
             }
+    }
+    public List<User> selAllUser(){
+            UserExample userExample = new UserExample();
 
+        List<User> users = userMapper.selectByExample(userExample);
 
+        return users;
     }
 
 }

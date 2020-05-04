@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
+<head>
+<!--    后台管理 增加模块-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>东东博客</title>
+    <link rel="icon" href="images/4.png" sizes="32x32">
+    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="/css/layui.css">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+</head>
+<script>
+    document.oncontextmenu = new Function("return false;");
+    function fuckyou(){
+        window.close(); //关闭当前窗口(防抽)
+        window.location="about:blank"; //将当前窗口跳转置空白页
+    }
+    function ck() {
+        console.profile();
+        console.profileEnd();
+        //我们判断一下profiles里面有没有东西，如果有，肯定有人按F12了，没错！！
+        if(console.clear) { console.clear() };
+        if (typeof console.profiles =="object"){
+            return console.profiles.length > 0;
+        }
+    }
+    function hehe(){
+        if( (window.console && (console.firebug || console.table && /firebug/i.test(console.table()) )) || (typeof opera == 'object' && typeof opera.postError == 'function' && console.profile.length > 0)){
+            fuckyou();
+        }
+        if(typeof console.profiles =="object"&&console.profiles.length > 0){
+            fuckyou();
+        }
+    }
+    hehe();
+    window.onresize = function(){
+        if((window.outerHeight-window.innerHeight)>200)
+//判断当前窗口内页高度和窗口高度，如果差值大于200，那么呵呵
+            fuckyou();
+    }
+</script>
+<body style="background-color: whitesmoke">
+
+<form class="layui-form" action="post">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">单行选择框</label>
+        <div class="layui-input-block" >
+            <select name="tag" lay-filter="aihao" >
+                <option value=""></option>
+                <option value="0">写作</option>
+                <option value="1" selected="">阅读</option>
+                <option value="2">游戏</option>
+                <option value="3">音乐</option>
+                <option value="4">旅行</option>
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" lay-reqtext="标题是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">普通文本域</label>
+        <div class="layui-input-block">
+            <textarea name="des" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+
+
+<!-- 你的HTML代码 -->
+
+<script src="js/layui.all.js"></script>
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer
+            , form = layui.form;
+
+        // layer.msg('Hello World');
+    });
+
+</script>
+
+</body>
+</html>

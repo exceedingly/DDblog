@@ -1,37 +1,91 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html >
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>东东博客</title>
+    <link rel="icon" href="images/4.png" sizes="32x32">
+    <script>
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState == 'hidden') {
+                normal_title = document.title;
+                document.title = '快回来！';
+            } else document.title = normal_title;
+        });
+    </script>
+
     <link rel="stylesheet" href="/css/layui.css">
     <link rel="stylesheet" href="/css/admin.css">
+    <style>
 
+
+        .bi::before {
+            display: inline-block;
+            content: "";
+            background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/></svg>");
+            background-repeat: no-repeat;
+            background-size: 1rem 1rem;
+        }
+
+
+    </style>
     <title>管理后台</title>
 </head>
-
+<script>
+    document.oncontextmenu = new Function("return false;");
+    function fuckyou(){
+        window.close(); //关闭当前窗口(防抽)
+        window.location="about:blank"; //将当前窗口跳转置空白页
+    }
+    function ck() {
+        console.profile();
+        console.profileEnd();
+        //我们判断一下profiles里面有没有东西，如果有，肯定有人按F12了，没错！！
+        if(console.clear) { console.clear() };
+        if (typeof console.profiles =="object"){
+            return console.profiles.length > 0;
+        }
+    }
+    function hehe(){
+        if( (window.console && (console.firebug || console.table && /firebug/i.test(console.table()) )) || (typeof opera == 'object' && typeof opera.postError == 'function' && console.profile.length > 0)){
+            fuckyou();
+        }
+        if(typeof console.profiles =="object"&&console.profiles.length > 0){
+            fuckyou();
+        }
+    }
+    hehe();
+    window.onresize = function(){
+        if((window.outerHeight-window.innerHeight)>200)
+//判断当前窗口内页高度和窗口高度，如果差值大于200，那么呵呵
+            fuckyou();
+    }
+</script>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">layui 后台布局</div>
+        <div class="layui-logo">
+            后台管理
+        </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav" style="position: fixed;top: 0;z-index: 9997">
-            <li class="layui-nav-item" style="margin-left: 300px"><a href="/nav">首页</a></li>
-            <li class="layui-nav-item" ><a href="/">博客内容</a></li>
+        <ul class="layui-nav" style="position: fixed;top: 0;z-index: 9997;">
+            <li class="layui-nav-item" style="margin-left: 200px"><a href="/nav">退回首页</a></li>
 
 
-            <li th:if="${ null == session.user}" class="layui-nav-item"><a href="/login">发布文章</a></li>
 
-            <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/publish">发布文章</a></li>
-            <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/manage">后台</a></li>
-            <li class="layui-nav-item" lay-unselect="" >
+            <!--            <li th:if="${ null == session.user}" class="layui-nav-item"><a href="/login">发布文章</a></li>-->
 
+            <!--            <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/publish">发布文章</a></li>-->
+            <!--            <li th:if="${ null != session.user}" class="layui-nav-item"><a href="/manage">后台</a></li>-->
+            <li class="layui-nav-item" style="float: right">
 
 
                 <ul>
 
                     <li th:if="${ null != session.user}">
-                        <a th:text="${session.user.getUsername() }">aa</a>
+                        <a th:text="'您好  '+${session.user.getUsername() }">aa</a>
 
                         <dl class="layui-nav-child">
                             <dd><a href="/publish">添加博文</a></dd>
@@ -45,54 +99,131 @@
                     </li>
 
                 </ul>
+            </li>
+
+        </ul>
 
     </div>
 
-    <div class="layui-side layui-bg-black" style="margin-top: 50px">
+    <div class="layui-side layui-bg-black" style="margin-top: 50px;font-size: 25px">
         <div class="layui-side-scroll">
             <!-- 左侧垂直导航区域-->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item">
-                    <a class="" href="javascript:;">管理员管理</a>
+                <li class="layui-nav-item" style="font-size: 30px">
+                    <a href="javascript:;" aria-hidden="true">
+                        <svg class="bi bi-grid-1x2 " width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M6 1H1v14h5V1zm9 0h-5v5h5V1zm0 9h-5v5h5v-5zM0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1V1zm1 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-5z" clip-rule="evenodd"/>
+                        </svg>
+                        &nbsp;&nbsp;&nbsp;博客管理
+                    </a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" data-id="1" data-title="管理员列表" data-url="/selAllQuestion"
-                               class="site-demo-active" data-type="tabAdd">管理员列表</a></dd>
-                        <dd><a href="javascript:;" data-id="2" data-title="管理员日志" data-url="/login"
-                               class="site-demo-active" data-type="tabAdd">管理员日志</a></dd>
-                        <dd><a href="javascript:;" data-id="2" data-title="员日志" data-url="/publish"
-                               class="site-demo-active" data-type="tabAdd">管日志</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">交易管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"  data-id="3" data-title="存款列表"
-                               　data-url="index.php?&a=adminList" class="site-demo-active" data-type="tabAdd">存款列表</a>
+                            <a href="javascript:;" data-id="1" data-title="查看博客" data-url="/selAllQuestion" class="site-demo-active " data-type="tabAdd">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <svg class="bi bi-intersect" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M12 4v6.5a1.5 1.5 0 0 1-1.5 1.5H4V5.5A1.5 1.5 0 0 1 5.5 4H12z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd" d="M14.5 5h-9a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-9-1A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 4h-9z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd" d="M10.5 1h-9a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-9-1A1.5 1.5 0 0 0 0 1.5v9A1.5 1.5 0 0 0 1.5 12h9a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 10.5 0h-9z" clip-rule="evenodd"/>
+                                </svg>
+                                &nbsp;&nbsp;&nbsp;查看博客
+                            </a>
                         </dd>
-                        <dd><a href="javascript:;">代付列表</a></dd>
+<!--                        <dd><a href="javascript:;" data-id="2" data-title="管理员日志" data-url="/login"-->
+<!--                               class="site-demo-active" data-type="tabAdd">管理员日志</a></dd>-->
+<!--                        <dd><a href="javascript:;" data-id="2" data-title="员日志" data-url=""-->
+<!--                               class="site-demo-active" data-type="tabAdd">管日志</a></dd>-->
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">系统管理</a>
+                    <a href="javascript:;">
+                        <svg class="bi bi-people-circle" width="1em" height="1em" viewBox="0 0 16 16"
+                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        &nbsp;&nbsp;&nbsp;用户管理
+                    </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">支付API设置</a></dd>
-                        <dd><a href="javascript:;">公告设置</a></dd>
-                        <dd><a href="javascript:;">控制台</a></dd>
+                        <dd>
+                            <a href="javascript:;" data-id="3" data-title="查看博客" data-url="/selAllUser" class="site-demo-active " data-type="tabAdd">
+<!--                            <a href="javascript:;" data-id="3" data-title="查看用户" 　data-url="/selAllUser" class="site-demo-active" data-type="tabAdd">-->
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <svg class="bi bi-people-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                                &nbsp;&nbsp;&nbsp;查看用户
+                            </a>
+                        </dd>
+
+                    </dl>
                 </li>
+<!--                                <li class="layui-nav-item">-->
+<!--                                    <a href="javascript:;">首页展示内容</a>-->
+<!--                                    <dl class="layui-nav-child">-->
+<!--                                        <dd><a href="javascript:;" data-id="2" data-title="管理员日志" data-url="/login"-->
+<!--                                               class="site-demo-active" data-type="tabAdd">管理员日志</a></dd>-->
+<!--                                        <dd><a href="javascript:;">公告设置</a></dd>-->
+<!--                                        <dd><a href="javascript:;">控制台</a></dd>-->
+<!--                                </li>-->
             </ul>
         </div>
     </div>
 
     <!--tab标签-->
-    <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 300px;;margin-top: 50px">
-        <ul class="layui-tab-title"></ul>1
-        <div class="layui-tab-content"></div>
+    <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 250px;margin-top: 50px">
+
+        <ul class="layui-tab-title"  >
+            <li class="layui-this" lay-allowclose="false">控制台</li>
+        </ul>
+        <div class="layui-tab-content " >
+            <div class="layui-tab-item layui-show">
+                <div style="padding: 20px; background-color: #F2F2F2;">
+                    <div class="layui-row layui-col-space15">
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header" ><h2>总浏览量：</h2></div>
+                                <div class="layui-card-body" >
+                                        <span style="font-size: 40px" th:text="${fw}" ></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header"><h2>你好</h2></div>
+                                <div class="layui-card-body">
+                                    <h4>欢迎使用后台管理系统</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-header"><h2>待处理事项</h2></div>
+                                <div class="layui-card-body">
+                                    <h3>暂无待处理事项</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
     </div>
 
     <div class="layui-footer" style="text-align:center;">
         <!-- 底部固定区域 -->
-        © sunway.tk XXXX业务管理平台
+
+
+        © yutunan.com后台系统
     </div>
 </div>
 <script src="/js/layui.all.js"></script>
@@ -147,9 +278,10 @@
                 element.tabDelete("demo", id);//删除
             }
         };
+
         function FrameWH() {
             var h = $(window).height();
-            $("iframe").css("height",h+"px");
+            $("iframe").css("height", h + "px");
         }
     });
 </script>

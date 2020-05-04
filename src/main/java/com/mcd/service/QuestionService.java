@@ -197,4 +197,13 @@ public class QuestionService {
             questionMapper.updateByExampleSelective(updateQuestion, example);
         }
     }
+
+    public void delete(Integer id){
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.createCriteria()
+                .andIdEqualTo(id);
+        questionMapper.deleteByExample(questionExample);
+    }
+
+
 }

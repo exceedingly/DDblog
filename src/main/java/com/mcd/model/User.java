@@ -264,4 +264,18 @@ public class User {
     public void setGmtModified(Long gmtModified) {
         this.gmtModified = gmtModified;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", token='" + token + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", accountId='" + accountId + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                '}';
+    }
 }
