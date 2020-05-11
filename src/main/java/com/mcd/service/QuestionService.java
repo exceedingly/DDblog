@@ -205,5 +205,57 @@ public class QuestionService {
         questionMapper.deleteByExample(questionExample);
     }
 
+    public List<Question> selAllByTag(String tag){
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.createCriteria().andTagEqualTo(tag);
+        List<Question> questions = questionMapper.selectByExampleWithBLOBs(questionExample);
+        return questions;
+    }
 
+    public PageInfoDTO listByTag(Integer page, Integer size,String tag){
+     /*
+去数据库拿标签
+ */
+        Integer offset = size*(page-1);
+        QuestionExample questionExample = new QuestionExample();
+                questionExample.createCriteria().andTagEqualTo(tag);
+        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample, new RowBounds(offset, size));
+
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+
+        //那好数据 给dto
+        PageInfoDTO pageInfoDTO = new PageInfoDTO();
+
+        for(Question question:questions){
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+
+            UserExample userExample = new UserExample();
+            userExample.createCriteria().andIdEqualTo(question.getCreator());
+            List<User> users = userMapper.selectByExample(userExample);
+            if(users.size()!=0){
+                questionDTO.setUser(users.get(0));
+            }else{
+                System.out.println("QuestionService 46 error");
+            }
+
+            questionDTOS.add(questionDTO);
+
+        }
+        //设置 pageinfo DTO内容
+        pageInfoDTO.setQuestion(questionDTOS);
+        //数据总数
+
+//        Integer totalCount = questionMapper.count();
+//        //给你参数 你给我算 加工一下DTO主要是页面 页码现实问题
+        QuestionExample questionExample1 = new QuestionExample();
+        questionExample1.createCriteria().andTagEqualTo(tag);
+        int totalCount = (int)questionMapper.countByExample(questionExample1);
+        pageInfoDTO.setPagination(totalCount,page,size);
+        //dto加工完成
+
+        return pageInfoDTO;
+
+
+    }
 }

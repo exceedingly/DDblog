@@ -1,5 +1,7 @@
 package com.mcd.controller;
 
+import com.mcd.dto.PageInfoDTO;
+import com.mcd.dto.QuestionDTO;
 import com.mcd.mapper.QuestionMapper;
 import com.mcd.mapper.UserMapper;
 import com.mcd.model.Question;
@@ -125,14 +127,77 @@ public class PublicController {
             questions.get(0).setTitle(title);
             questions.get(0).setDescription(description);
 
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+id "+id);
+
             questionMapper.updateByExampleWithBLOBs(questions.get(0),questionExample);
 
+
+        }
+
+
+
+        return "redirect:/";
+    }
+    @PostMapping("/mpublish")
+    //po执行请求
+    public String domPublish(
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "tag", required = false) String tag,
+            @RequestParam(value = "id",required = false) Integer id,
+            @RequestParam(name="size",defaultValue = "5") Integer size,
+            @RequestParam(name="page",defaultValue = "1") Integer page,
+            HttpServletRequest request,
+            Model model
+    ) {
+
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (user == null) {
+            model.addAttribute("usernull", "请登录");
+            return "publish";
+        }
+        if (title == null || title.equals("")) {
+            model.addAttribute("titlenull", "标题不能为空");
+            return "publish";
+        }
+        if (description == null || description.equals("")) {
+            model.addAttribute("descriptionnull", "内容不能为空");
+            return "publish";
+        }
+        if (tag == null || tag.equals("")) {
+            model.addAttribute("tagnull", "标签不能为空");
+            return "publish";
+        }
+        Question question = new Question();
+        if( id ==null){
+            question.setId(id);
+            question.setTitle(title);
+            question.setDescription(description);
+            question.setTag(tag);
+            question.setCreator(user.getId());
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.insert(question);
+            model.addAttribute("insertSuccess", "200");
+        }else{
+            QuestionExample questionExample = new QuestionExample();
+            questionExample.createCriteria().andIdEqualTo(id);
+            List<Question> questions = questionMapper.selectByExampleWithBLOBs(questionExample);
+            questions.get(0).setTag(tag);
+            questions.get(0).setTitle(title);
+            questions.get(0).setDescription(description);
+            questionMapper.updateByExampleWithBLOBs(questions.get(0),questionExample);
             model.addAttribute("insertSuccess", "200");
         }
 
-        String result = "/question/"+id;
+        PageInfoDTO pageinfo = questionService.list(page,size);
+        List<QuestionDTO> questions = pageinfo.getQuestion();
 
-        return "redirect:/";
+        model.addAttribute("pageinfo",pageinfo);
+
+        model.addAttribute("questions",questions);
+        return  "selAllQuestion";
+
+
     }
 }

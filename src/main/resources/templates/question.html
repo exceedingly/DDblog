@@ -68,8 +68,7 @@
 
                         <!--                    正文-->
 
-                        &nbsp;<span th:text="${question.description}" style="font-size: 20px"></span>
-
+                        &nbsp;<span sid="textDesc"th:text="${description}" style="font-size: 20px;white-space: pre-line;"></span>
 
                             <hr/>
 
@@ -148,4 +147,9 @@
 
 
 </script>
+<script type="text/javascript">
+    var content = $("#textDesc").val();
+    content = content.replace(/\n|\r\n/g,"<br>");
+</script>
+
 </html>

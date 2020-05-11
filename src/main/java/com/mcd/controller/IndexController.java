@@ -3,6 +3,7 @@ package com.mcd.controller;
 import com.mcd.dto.PageInfoDTO;
 import com.mcd.dto.QuestionDTO;
 import com.mcd.mapper.UserMapper;
+import com.mcd.model.Question;
 import com.mcd.model.User;
 import com.mcd.model.UserExample;
 import com.mcd.service.QuestionService;
@@ -11,12 +12,14 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -44,15 +47,13 @@ public class IndexController {
       try{
 
           fr = new FileReader("/home/mcd/nums.txt");
-//          fr = new FileReader("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt");
           br=new BufferedReader(fr);
 
           String count = (String)br.readLine();
-          System.out.println("my is ##################"+count);
+
           String i  = Integer.toString(Integer.parseInt(count)+1);
           request.getSession().setAttribute("fangwenliang", i);
-//          model.addAttribute("fangwenliang",i);
-//          fw = new FileWriter("C:/mycore/ideaProject2020/3/0320/src/main/resources/static/nums/nums.txt",false);
+
           fw = new FileWriter("/home/mcd/nums.txt",false);
           bw = new BufferedWriter(fw);
           bw.write(i);
@@ -112,7 +113,7 @@ public class IndexController {
 
      PageInfoDTO  pageinfo = questionService.list(page,size);
       List<QuestionDTO> questions = pageinfo.getQuestion();
-      System.out.println(pageinfo);
+
       model.addAttribute("pageinfo",pageinfo);
       for(QuestionDTO q:questions){
           if(q.getDescription().length()>10){
@@ -122,7 +123,7 @@ public class IndexController {
           }
       }
       model.addAttribute("questions",questions);
-      System.out.println(questions);
+
       return "index";
   }
 
@@ -190,6 +191,29 @@ public class IndexController {
 
 
         return "redirect:/";
+    }
+    @GetMapping("/selByTag")
+    public String logout(
+           String tag,
+           Model model,
+           @RequestParam(name="page",defaultValue = "1") Integer page,
+           @RequestParam(name="size",defaultValue = "5") Integer size){
+
+
+        PageInfoDTO  pageinfo = questionService.listByTag(page,size,tag);
+        List<QuestionDTO> questions = pageinfo.getQuestion();
+        System.out.println(pageinfo);
+        model.addAttribute("pageinfo",pageinfo);
+        for(QuestionDTO q:questions){
+            if(q.getDescription().length()>10){
+                String oldString = q.getDescription();
+                String newString = oldString.substring(0,10);
+                q.setDescription(newString);
+            }
+        }
+        model.addAttribute("questions",questions);
+
+        return "index";
     }
 
 

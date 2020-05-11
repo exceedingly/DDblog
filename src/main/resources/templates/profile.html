@@ -14,6 +14,8 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/menu.js"></script>
 
+
+
     <script>
         document.oncontextmenu = new Function("return false;");
         function fuckyou(){
@@ -71,10 +73,25 @@
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading" > <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a></h4>
+
+
                         <span class="badge badge-pill badge-danger"
                               style="background-color: #007DDB;float:right;font-size: 15px"
-                              th:text="${question.tag}">标签</span>
-                        <span th:text="${question.description}"></span><br>
+                              th:text="${tag}">标签</span>
+<!--                        <textarea th:text="${description}" name="description" id="description"-->
+<!--                                  class="form-control"-->
+<!--                                  cols=""-->
+<!--                                  rows="15">-->
+
+
+
+
+<!--                                    </textarea>-->
+                        <div class="text-justify" style="white-space: pre-line;" th:text="${description}"></div>
+
+
+
+
                         <span class="text-desc" th:text="${question.commentCount}"></span>个回复 ·
                         <span th:text="${question.viewCount}"></span>次·浏览·<span
                             th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span>

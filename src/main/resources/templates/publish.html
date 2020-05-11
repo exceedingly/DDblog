@@ -98,6 +98,7 @@
                             <option th:selected="${tag== 'Algorithm'}"  value="算法">算法</option>
                             <option th:selected="${tag== 'Net'}" value="网络">网络</option>
                             <option th:selected="${tag== 'Plugin'}" value="插件">插件</option>
+                            <option  th:selected="${tag== 'face'}" value="面经    ">面经</option>
                             <option  th:selected="${tag== 'Order'}" value="Order">Order</option>
 
                         </select>
@@ -120,12 +121,8 @@
 <!--                正文-->
                 <div class="form-group" id="question-editor">
                     <label style="font-size: 20px" >正文</label>
-                    <textarea th:text="${description}" name="description" id="description"
-                              class="form-control"
-                              cols=""
-                              rows="15">
-
-                                    </textarea>
+                    <textarea th:text="${description}" name="description" id="description" class="form-control" cols="" rows="15" style="word-wrap:normal;">
+                     </textarea>
 
                 </div>
 
@@ -179,6 +176,18 @@
     });
 
 </script>
+<script type="text/javascript" src="/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create()
 
+
+    document.getElementById("submit").onclick = function(){
+        var newString = document.getElementById("description").value.replace(/\n/g, '_@').replace(/\r/g, '_#');
+        document.getElementById("result").innerHTML = newString;
+    };
+</script>
 </body>
 </html>

@@ -62,9 +62,7 @@ public class BlogContextControlltr {
 
         PageInfoDTO pageinfo = questionService.list(page,size);
         List<QuestionDTO> questions = pageinfo.getQuestion();
-
         model.addAttribute("pageinfo",pageinfo);
-
         model.addAttribute("questions",questions);
         return  "selAllQuestion";
 
@@ -78,7 +76,7 @@ public class BlogContextControlltr {
                                Model model,
                                @RequestParam(name="size",defaultValue = "5") Integer size,
                                @RequestParam(name="page",defaultValue = "1") Integer page){
-        System.out.println(id+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+
        questionService.delete(id);
         PageInfoDTO pageinfo = questionService.list(page,size);
         List<QuestionDTO> questions = pageinfo.getQuestion();

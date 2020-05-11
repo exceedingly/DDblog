@@ -46,18 +46,27 @@
 </script>
 <body style="background-color: whitesmoke">
 
-<form class="layui-form" action="post">
+<form class="layui-form" action="/mpublish" method="post">
 
     <div class="layui-form-item">
         <label class="layui-form-label">单行选择框</label>
         <div class="layui-input-block" >
             <select name="tag" lay-filter="aihao" >
-                <option value=""></option>
-                <option value="0">写作</option>
-                <option value="1" selected="">阅读</option>
-                <option value="2">游戏</option>
-                <option value="3">音乐</option>
-                <option value="4">旅行</option>
+
+
+                    <option  th:selected="${tag == 'Java'}"   value="Java">Java</option>
+                    <option   th:selected="${tag== 'JVM'}" value="JVM">JVM</option>
+                    <option  th:selected="${tag== 'Web'}" value="Web">WEB</option>
+                    <option  th:selected="${tag== 'Thread'}" value="并发">并发</option>
+                    <option  th:selected="${tag== 'OS'}" value="操作系统">操作系统</option>
+                    <option th:selected="${tag== 'DB'}" value="数据库">数据库</option>
+                    <option th:selected="${tag== 'Algorithm'}"  value="算法">算法</option>
+                    <option th:selected="${tag== 'Net'}" value="网络">网络</option>
+                    <option th:selected="${tag== 'Plugin'}" value="插件">插件</option>
+                    <option  th:selected="${tag== 'Order'}" value="Order">Order</option>
+
+
+
             </select>
         </div>
     </div>
@@ -75,7 +84,8 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">普通文本域</label>
         <div class="layui-input-block">
-            <textarea name="des" placeholder="请输入内容" class="layui-textarea"></textarea>
+
+            <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
         </div>
     </div>
 
