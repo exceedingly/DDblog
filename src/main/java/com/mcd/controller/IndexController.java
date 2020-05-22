@@ -89,6 +89,11 @@ public class IndexController {
       }
 
 
+      //为了 获得ip
+      String requestURI = request.getRemoteAddr();
+      System.out.println(requestURI);
+
+
       Cookie[] cookies = request.getCookies();
       if (null != cookies) {
           for (Cookie cookie : cookies) {
@@ -126,6 +131,7 @@ public class IndexController {
 
       return "index";
   }
+
 
 
 

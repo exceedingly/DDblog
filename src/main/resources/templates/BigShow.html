@@ -69,14 +69,15 @@
                             <path fill-rule="evenodd" d="M2.036 9.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V10h-3.5a.5.5 0 0 1-.5-.5z" clip-rule="evenodd"/>
                         </svg>
                     </button>
+
                 </form>
-                <col>
+                <hr/>
             </colgroup>
             <div class="layui-collapse" >
                 <div class="layui-colla-item" th:each="q:${questions}"  lay-accordion="">
                     <h2 class="layui-colla-title" th:text="${q.title}"></h2>
                     <div class="layui-colla-content ">
-                        <p id="paramterText" th:text="${q.description}"></p>
+                        <p style="white-space: pre-line;" id="paramterText" th:text="${q.description}"></p>
                     </div>
                 </div>
 
