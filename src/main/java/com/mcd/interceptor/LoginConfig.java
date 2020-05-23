@@ -10,14 +10,14 @@ import org.springframework.web.servlet.config.annotation.*;
 @Configurable
 public class LoginConfig  extends WebMvcConfigurerAdapter  {
 
-   @Autowired
-   AdminInterceptor adminInterceptor;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(adminInterceptor);
-        super.addInterceptors(registry);
-
-
-    }
+//   @Autowired
+//   AdminInterceptor adminInterceptor;
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(adminInterceptor);
+//        super.addInterceptors(registry);
+//
+//
+//    }
 }

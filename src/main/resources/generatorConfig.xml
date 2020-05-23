@@ -40,6 +40,7 @@
         <!--    必须要写-->
         <table  tableName="user" domainObjectName="User" ></table>
         <table  tableName="question" domainObjectName="Question" ></table>
+        <table  tableName="requestip" domainObjectName="RequestIP" ></table>
 
     </context>
 </generatorConfiguration>
