@@ -14,31 +14,5 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    UserMapper userMapper;
-
-        public User selUserByUser(User user) {
-            UserExample userExample = new UserExample();
-            userExample.createCriteria().andPasswordLike(user.getPassword()).andUsernameEqualTo(user.getUsername());
-            List<User> users = userMapper.selectByExample(userExample);
-            if(users.size()==0){
-                System.out.println("UserService 25");
-            }
-
-            return users.get(0);
-
-        }
-    public void ChangeTokenByUserLogin(String token,String newStoken){
-            UserExample userExample = new UserExample();
-            userExample.createCriteria().andTokenEqualTo(token);
-            List<User> users = userMapper.selectByExample(userExample);
-            if(users.size()!=0){
-                //根据旧token查找出对象
-                User oldUser = users.get(0);
-                users.get(0).setToken(newStoken);
-            }
-
-
-    }
 
 }
